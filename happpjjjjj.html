@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Happy Birthday!</title>
+  <style>
+    * {
+      margin: 10;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(to top, #ffe3e3, #ffc9de);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 50px;
+      font-size: 3.5em;
+      color: #d6336c;
+      animation: pop 1.5s infinite alternate;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.05); }
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      z-index: 100;
+    }
+
+    button:hover {
+      background-color: #ff85c1;
+    }
+
+    /* Balloons */
+    .balloon {
+      position: absolute;
+      width: 60px;
+      height: 80px;
+      background-color: red;
+      border-radius: 50% 50% 45% 45%;
+      opacity: 0.8;
+      animation: floatUp linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(100vh); opacity: 1; }
+      100% { transform: translateY(-150vh); opacity: 0; }
+    }
+
+    /* Roses */
+    .rose {
+      position: absolute;
+      width: 60px;
+      animation: floatRose 10s linear infinite;
+      display: none;
+      z-index: 2;
+    }
+
+    @keyframes floatRose {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-150vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Audio Player */
+    audio {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      z-index: 999;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎉 Happy Birthday! 🎉</h1>
+  <button onclick="startCelebration()">Click for Surprise 🎁</button>
+
+  <!-- Balloons -->
+  <script>
+    const colors = ['#f94144', '#f3722c', '#f8961e', '#f9844a', '#43aa8b', '#577590', '#9d4edd', '#e5383b'];
+
+    for (let i = 0; i < 30; i++) {
+      const balloon = document.createElement('div');
+      balloon.className = 'balloon';
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      const left = Math.random() * 100;
+      const delay = Math.random() * 5;
+      const duration = 6 + Math.random() * 5;
+
+      balloon.style.backgroundColor = color;
+      balloon.style.left = `${left}%`;
+      balloon.style.animationDuration = `${duration}s`;
+      balloon.style.animationDelay = `${delay}s`;
+
+      document.body.appendChild(balloon);
+    }
+  </script>
+
+  <!-- Roses -->
+  <img src="https://www.pngall.com/wp-content/uploads/2016/05/Rose-Flower.png" class="rose" style="left: 10%;" id="rose1">
+  <img src="https://www.pngall.com/wp-content/uploads/2016/05/Rose-Flower.png" class="rose" style="left: 30%;" id="rose2">
+  <img src="https://www.pngall.com/wp-content/uploads/2016/05/Rose-Flower.png" class="rose" style="left: 50%;" id="rose3">
+  <img src="https://www.pngall.com/wp-content/uploads/2016/05/Rose-Flower.png" class="rose" style="left: 70%;" id="rose4">
+  <img src="https://www.pngall.com/wp-content/uploads/2016/05/Rose-Flower.png" class="rose" style="left: 90%;" id="rose5">
+
+  <!-- Background Music -->
+  <audio autoplay loop controls>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Confetti JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <!-- Celebration Script -->
+  <script>
+    function startCelebration() {
+      // Show roses
+      const roses = document.querySelectorAll('.rose');
+      roses.forEach((rose, index) => {
+        setTimeout(() => {
+          rose.style.display = "block";
+        }, index * 400);
+      });
+
+      // Launch confetti
+      for (let i = 0; i < 5; i++) {
+        setTimeout(() => {
+          confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 }
+          });
+        }, i * 500);
+      }
+    }
+  </script>
+
+</body>
+</html>
