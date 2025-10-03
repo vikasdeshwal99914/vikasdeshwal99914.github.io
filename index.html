@@ -2,29 +2,87 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Rainbow</title>
+<title>Happy Birthday Anuj 🎂</title>
 <style>
   body {
     margin:0;
     height:100vh;
+    background: linear-gradient(to top, #87CEEB, #ffffff);
     display:flex;
+    flex-direction:column;
     justify-content:center;
     align-items:center;
-    color:white;
-    font-family:Verdana;
-    font-size:3em;
-    animation: rainbow 8s linear infinite;
-    background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet);
-    background-size:1400% 1400%;
+    font-family: 'Arial', sans-serif;
+    overflow:hidden;
   }
-  @keyframes rainbow {
-    0% {background-position:0% 50%;}
-    50% {background-position:100% 50%;}
-    100% {background-position:0% 50%;}
+  h1 {
+    font-size:3em;
+    color:#222;
+    text-shadow:0 0 10px gold;
+    margin-bottom:20px;
+  }
+  button {
+    padding:12px 25px;
+    font-size:1.2em;
+    font-weight:bold;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    background:linear-gradient(45deg,#ff7eb9,#ffcc70);
+    color:#222;
+    box-shadow:0 4px 10px rgba(0,0,0,0.4);
+    transition:transform 0.2s;
+  }
+  button:hover {
+    transform:scale(1.1);
+  }
+  .balloon {
+    position:absolute;
+    bottom:-150px;
+    width:60px;
+    height:80px;
+    border-radius:50% 50% 45% 45%;
+    opacity:0.9;
+    animation: floatUp linear forwards;
+  }
+  .balloon:after {
+    content:"";
+    position:absolute;
+    width:2px;
+    height:50px;
+    background:#333;
+    left:50%;
+    bottom:-50px;
+    transform:translateX(-50%);
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(0) scale(1); opacity:1; }
+    100% { transform: translateY(-120vh) scale(0.9); opacity:0.7; }
   }
 </style>
 </head>
 <body>
-  🌈 Happy Birthday Anuj 🌈
+  <h1>🎉 Happy Birthday Anuj 🎉</h1>
+  <button onclick="surprise()">🎈 Surprise 🎈</button>
+
+<script>
+function random(min,max){ return Math.random()*(max-min)+min; }
+
+function createBalloon(){
+  let b=document.createElement("div");
+  b.className="balloon";
+  b.style.background=`hsl(${Math.random()*360},100%,60%)`;
+  b.style.left=random(5,95)+"vw";
+  b.style.animationDuration=random(6,12)+"s";
+  document.body.appendChild(b);
+  setTimeout(()=>b.remove(),13000);
+}
+
+function surprise(){
+  for(let i=0;i<40;i++){
+    setTimeout(createBalloon,i*200);
+  }
+}
+</script>
 </body>
 </html>
