@@ -1,160 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>kdp ghee</title>
-
-    <style>
-        body {
-        background-color:#B8BC86;
-                 text-align:justify;
-
-        }
-        ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #B8BC86;
-  font-size:200%;
-}
-
-li {
-  float: left;
-}
-
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 16px;
-  text-decoration: none;
-  justify-content: center;
-
-}
-
-li a:hover {
-  background-color:white;
-}
-
- ul.navbar {
-    display: flex;
-    justify-content: center;
-    list-style: none;
-    padding: 0;
+<meta charset="UTF-8">
+<title>Balloons</title>
+<style>
+  body {
     margin: 0;
-    background-color: #B8BC86;
+    background: skyblue;
+    overflow: hidden;
   }
-
-  ul.navbar li {
-    margin:  15px;
+  .balloon {
+    position: absolute;
+    bottom: -150px;
+    width: 60px;
+    height: 80px;
+    background: red;
+    border-radius: 50% 50% 45% 45%;
+    animation: float 10s linear infinite;
   }
-
-  ul.navbar li a {
-    text-decoration: none;
-    color: #333;
+  .balloon:after {
+    content: "";
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    width: 2px;
+    height: 40px;
+    background: #333;
   }
-      <!--div.vikas {
-float:right;
-        }-->
-    </style>
+  @keyframes float {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-120vh); }
+  }
+</style>
 </head>
 <body>
-<div style="width:150px;margin:auto"><img src="/images/Logo-of-Krishna-Ghee-1-removebg-preview.png" alt="check the image" width="150px" height="50px" style="float:center"></div>
-<ul class="navbar">
-  <li><a href="index.html">Home</a></li>
-  <li><a href="products.html">Products</a></li>
-  <li><a href="contact.html">Contact us</a></li>
-  <li><a href="about_us.html">About us</a></li>
-</ul>
+<h1 style="color:green;font-family:cursive;text-align:center;padding-top:150px;"> HAPPY BIRTHDAY ANUJ</h1>
+<script>
+  const colors = ["red","yellow","blue","green","purple","orange","pink"];
+  function createBalloon(){
+    let b = document.createElement("div");
+    b.className="balloon";
+    b.style.background = colors[Math.floor(Math.random()*colors.length)];
+    b.style.left = Math.random()*100+"vw";
+    b.style.animationDuration = 6+Math.random()*6+"s";
+    document.body.appendChild(b);
+    setTimeout(()=>b.remove(),12000);
+  }
+  setInterval(createBalloon,500);
 
-<img src="/images/ghee-removebg-preview.png"alt="check the image" width="100%" height="350px">
-<br>
-<p style="font-size:150%;"><q>note</q>:-A person who is intersted in our products can take a 'distributership' or can purchase at wholesale rate for business purpose</p>
-<hr>
-<pre style="color:#2F0909">
-    <q style="font-size:370%">Health Benefits of Ghee</q>
-
-<p style="font-size:140%">Rich in Healthy Fats
-Ghee is a source of saturated fats that can provide energy and support hormone production. In moderation, it helps improve fat metabolism.
-
-High Smoke Point
-Ghee has a high smoke point (~485°F / 250°C), making it ideal for frying and sautéing without producing harmful free radicals.
-
-Lactose & Casein-Free
-Most of the dairy proteins and sugars are removed during the clarification process, making it easier to digest for people with lactose intolerance.
-
-Supports Digestion
-In Ayurveda, ghee is considered good for the gut. It stimulates the secretion of stomach acids, helping with digestion.
-
-Rich in Fat-Soluble Vitamins
-Ghee contains Vitamins A, D, E, and K, which are essential for immunity, bone health, skin, and vision.
-
-Contains Butyrate (Butyric Acid)
-A short-chain fatty acid that supports gut health, reduces inflammation, and may improve colon function.
-
-Boosts Immunity
-The antioxidants in ghee help neutralize free radicals and support overall immune function.
-
-Good for Skin
-Used topically, ghee helps moisturize and heal dry or inflamed skin. It's often used in Ayurvedic beauty treatments.
-
-Promotes Weight Loss (in moderation)
-The healthy fats in ghee can help mobilize stubborn fat and support metabolism when used correctly.
-
-Brain Health
-Ghee nourishes the brain and nervous system, and it's often used in traditional practices to enhance memory and concentration.</p>
-</pre>
-<hr>
-
-<pre style="color:#2F0909"><h1 style="font-size:375%;"> <ins>Myths About Cow Ghee </ins></h1>
-<h2 style="font-size:250%;">There are many common myths about cow ghee, and you too may believe in some of them.
-    Take a look at the myths below.</h2>
-   <p style="font-size:150%;">
-It is difficult to digest ghee.
-It is loaded with fats that may result in obesity.
-It is unsuitable for people with heart ailments.
-It is dangerous to consume dishes cooked in ghee.
-It can have toxic effects on your health.</p>
-</pre>
-<hr>
-<!--<div class="vikas"><img src="/images/kdppppp.png"alt="check the image"width="300px"height="300px"></div>-->
-<pre style="color:#2F0909;"><h1 style="font-size:375%;"><ins>How To Make Ghee At Home?</ins></h1>
-<p style="font-size:150%;">While you know about ghee uses and various benefits of ghee, learn the simple procedure to make ghee at home.
-    Making ghee at home is highly beneficial and comparatively cheaper than buying a jar of ghee at the market.
-    While it is easy to make, there are high chances of burning it if you do not monitor it properly.
-The best way to prepare ghee is from homemade butter. Homemade butter is prepared from the cream of milk or malai.
-    The advantage of using cream to prepare ghee is that you get three end products: ghee, butter, and buttermilk.
-Make sure your cream is rich and of good quality, and follow this in-depth recipe for preparing ghee at home.
-Be sure to use cold cream when you make ghee
-Churn the cream thoroughly in a large bowl for a few minutes
-Continue churning until you see the butter and liquid separate
-Make sure that the cream has separated completely
-Cover a sieve with a thin cotton cloth and place it on the bowl
-Drain the butter on the cloth and the liquid buttermilk in the container
-Squeeze the cloth to ensure that the liquid is removed completely
-Place the freshly prepared butter in a pan and keep it on the stove Melt the butter completely
-Simmer the butter and cook it for at least 20-25 minutes
-Stir intermittently to ensure that ghee does not burn
-Cook ghee until the color of ghee changes from a bright yellow color to a light golden-brown color
-Stop cooking when you get clear ghee and brownish milk solids at the bottom
-Cool the ghee and transfer it into an airtight jar after straining the milk solids
-Now that you are aware of the umpteen benefits of ghee, do not hesitate to include it in your diet.
-    It is one of the healthiest foods to have, but make sure that you are eating pure ghee.
-    This is what offers all the goodness that boosts your health. However, if you face any health issues or
-    have diet constraints, talk to doctors and specialists on Bajaj Finserv Health. Book a tele-consult or
-    in-person appointment and address all your health concerns with ease.</p>
-
-</pre>
-
-
-
+</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
