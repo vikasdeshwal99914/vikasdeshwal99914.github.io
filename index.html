@@ -1,88 +1,450 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Happy Birthday Anuj 🎂</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Happy Birthday Anuj — Burj Khalifa Surprise</title>
 <style>
-  body {
-    margin:0;
-    height:100vh;
-    background: linear-gradient(to top, #87CEEB, #ffffff);
+  :root{
+    --bg1:#020111;
+    --bg2:#1b3b6f;
+    --accent:#ffd86b;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial}
+  body{
+    background: radial-gradient(800px 400px at 15% 20%, rgba(255,210,120,0.06), transparent),
+                linear-gradient(180deg,var(--bg1),var(--bg2));
+    color:#fff;
     display:flex;
-    flex-direction:column;
-    justify-content:center;
     align-items:center;
-    font-family: 'Arial', sans-serif;
+    justify-content:center;
     overflow:hidden;
   }
-  h1 {
-    font-size:3em;
-    color:#222;
-    text-shadow:0 0 10px gold;
-    margin-bottom:20px;
+
+  .card{
+    width:100%;
+    max-width:1100px;
+    height:80vh;
+    position:relative;
+    border-radius:18px;
+    padding:28px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 20px 60px rgba(2,6,23,0.7);
+    border:1px solid rgba(255,255,255,0.03);
+    overflow:hidden;
   }
-  button {
-    padding:12px 25px;
-    font-size:1.2em;
-    font-weight:bold;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    background:linear-gradient(45deg,#ff7eb9,#ffcc70);
-    color:#222;
-    box-shadow:0 4px 10px rgba(0,0,0,0.4);
-    transition:transform 0.2s;
+
+  header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:18px;
+    position:relative;
+    z-index:30;
   }
-  button:hover {
-    transform:scale(1.1);
+  h1{
+    margin:0;
+    font-size:36px;
+    letter-spacing:0.6px;
+    color:var(--accent);
+    text-shadow:0 6px 18px rgba(0,0,0,0.6);
   }
-  .balloon {
+  p.lead{margin:6px 0 0;color:rgba(255,255,255,0.84)}
+
+  .controls{display:flex;gap:12px;margin-left:auto}
+  .btn{
+    background:linear-gradient(180deg,#ff9ab8,#ff6a97);
+    border:0;padding:10px 16px;border-radius:10px;color:#081225;font-weight:700;cursor:pointer;
+    box-shadow:0 10px 30px rgba(255,106,151,0.08);
+  }
+  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--accent)}
+
+  /* Scene area */
+  .scene{
+    position:absolute;inset:0;top:110px; /* leave space for header */
+    z-index:10;
+    pointer-events:none;
+  }
+
+  /* Burj silhouette (centered) */
+  .burj{
     position:absolute;
-    bottom:-150px;
-    width:60px;
-    height:80px;
-    border-radius:50% 50% 45% 45%;
-    opacity:0.9;
-    animation: floatUp linear forwards;
-  }
-  .balloon:after {
-    content:"";
-    position:absolute;
-    width:2px;
-    height:50px;
-    background:#333;
+    bottom:6%;
     left:50%;
-    bottom:-50px;
     transform:translateX(-50%);
+    width:220px;
+    max-width:40%;
+    z-index:20;
+    pointer-events:auto;
   }
+
+  /* Ground */
+  .ground{
+    position:absolute;
+    left:0;right:0;bottom:0;height:14%;
+    background:linear-gradient(180deg,#071025,#03060a);
+    opacity:0.9;
+    z-index:18;
+  }
+
+  /* Balloons */
+  .balloon{
+    position:absolute;
+    bottom:8%;
+    width:62px;height:84px;border-radius:52% 52% 45% 45%;
+    transform-origin:center bottom;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;color:white;
+    box-shadow: inset -8px -12px 22px rgba(0,0,0,0.25);
+  }
+  .balloon:after{
+    content:"";position:absolute;bottom:-46px;left:50%;transform:translateX(-50%);
+    width:2px;height:46px;background:linear-gradient(#ffffff33,#ffffff00);
+  }
+
   @keyframes floatUp {
-    0% { transform: translateY(0) scale(1); opacity:1; }
-    100% { transform: translateY(-120vh) scale(0.9); opacity:0.7; }
+    0% { transform: translateY(0) rotate(-6deg) scale(1); opacity:1; }
+    100% { transform: translateY(-140vh) rotate(6deg) scale(0.98); opacity:0.9; }
   }
+
+  /* spotlight */
+  .spot{
+    position:absolute;left:50%;bottom:0;transform:translateX(-50%);
+    width:2px;height:0;box-shadow:0 0 120px 40px rgba(255,240,200,0.07);
+    pointer-events:none;z-index:8;mix-blend-mode:screen;
+  }
+  .spot.on{animation:growSpot 600ms both}
+  @keyframes growSpot{from{height:0;opacity:0}to{height:52vh;opacity:1}}
+
+  /* small label */
+  .label{
+    position:absolute;left:50%;transform:translateX(-50%);top:54px;z-index:30;text-align:center;
+  }
+  .label h2{margin:0;font-size:26px;color:white;text-shadow:0 6px 18px rgba(0,0,0,0.6)}
+  .label p{margin:6px 0 0;color:#dfeaf8cc;font-size:14px}
+
+  /* responsive tweaks */
+  @media (max-width:720px){
+    .card{padding:16px;height:86vh}
+    h1{font-size:22px}
+    .burj{width:36%}
+    .label h2{font-size:18px}
+  }
+
 </style>
 </head>
 <body>
-  <h1>🎉 Happy Birthday Anuj 🎉</h1>
-  <button onclick="surprise()">🎈 Surprise 🎈</button>
+  <div class="card" id="card">
+    <header>
+      <div>
+        <h1>Happy Birthday, Anuj 🎉</h1>
+        <p class="lead">Wishing you joy — light the city tonight!</p>
+      </div>
+      <div class="controls">
+        <button class="btn" id="surpriseBtn">✨ Surprise</button>
+        <button class="btn ghost" id="resetBtn">Reset</button>
+      </div>
+    </header>
+
+    <div class="label" aria-hidden="true">
+      <h2>Burj Khalifa — Dubai</h2>
+      <p>Press <strong>Surprise</strong> to launch balloons & fireworks</p>
+    </div>
+
+    <div class="scene" id="scene">
+      <canvas id="fw" style="position:absolute;inset:0;z-index:12"></canvas>
+
+      <!-- Burj Khalifa SVG silhouette -->
+      <svg class="burj" viewBox="0 0 200 900" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg">
+        <!-- simplified stylized silhouette -->
+        <rect x="92" y="0" width="16" height="900" fill="#071b2f"/>
+        <rect x="86" y="40" width="28" height="860" fill="#071b2f"/>
+        <rect x="78" y="120" width="44" height="780" fill="#0b2b40"/>
+        <path d="M100 0 L110 40 L90 40 Z" fill="#0b2b40"/>
+        <path d="M100 60 L120 120 L80 120 Z" fill="#0e3a51"/>
+        <!-- small windows / lights as circles that will flash -->
+        <g id="lights">
+          <!-- repeated rows of dots; we'll animate them via JS by toggling fill -->
+          <!-- column 1 -->
+          <circle cx="92" cy="220" r="2.2" fill="#071b2f"/>
+          <circle cx="92" cy="260" r="2.2" fill="#071b2f"/>
+          <circle cx="92" cy="300" r="2.2" fill="#071b2f"/>
+          <circle cx="92" cy="340" r="2.2" fill="#071b2f"/>
+          <circle cx="92" cy="380" r="2.2" fill="#071b2f"/>
+          <!-- column 2 -->
+          <circle cx="108" cy="220" r="2.2" fill="#071b2f"/>
+          <circle cx="108" cy="260" r="2.2" fill="#071b2f"/>
+          <circle cx="108" cy="300" r="2.2" fill="#071b2f"/>
+          <circle cx="108" cy="340" r="2.2" fill="#071b2f"/>
+          <circle cx="108" cy="380" r="2.2" fill="#071b2f"/>
+        </g>
+      </svg>
+
+      <div class="spot" id="spot"></div>
+      <div class="ground"></div>
+      <!-- balloons container for DOM balloons -->
+      <div id="balloonLayer" style="position:absolute;inset:0;z-index:22;pointer-events:none"></div>
+    </div>
+  </div>
 
 <script>
-function random(min,max){ return Math.random()*(max-min)+min; }
+(function(){
+  // Utilities
+  const rand = (a,b)=>Math.random()*(b-a)+a;
+  const scene = document.getElementById('scene');
+  const fw = document.getElementById('fw');
+  const ctx = fw.getContext('2d');
+  const lights = Array.from(document.querySelectorAll('#lights circle'));
+  const balloonLayer = document.getElementById('balloonLayer');
+  const spot = document.getElementById('spot');
+  const surpriseBtn = document.getElementById('surpriseBtn');
+  const resetBtn = document.getElementById('resetBtn');
 
-function createBalloon(){
-  let b=document.createElement("div");
-  b.className="balloon";
-  b.style.background=`hsl(${Math.random()*360},100%,60%)`;
-  b.style.left=random(5,95)+"vw";
-  b.style.animationDuration=random(6,12)+"s";
-  document.body.appendChild(b);
-  setTimeout(()=>b.remove(),13000);
-}
-
-function surprise(){
-  for(let i=0;i<40;i++){
-    setTimeout(createBalloon,i*200);
+  // Setup canvas size
+  function resize(){
+    fw.width = scene.clientWidth * devicePixelRatio;
+    fw.height = scene.clientHeight * devicePixelRatio;
+    fw.style.width = scene.clientWidth + 'px';
+    fw.style.height = scene.clientHeight + 'px';
+    ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
   }
-}
+  window.addEventListener('resize', resize);
+  resize();
+
+  // Fireworks particles
+  let particles = [];
+
+  function spawnFirework(x,y,color){
+    const count = 60;
+    for(let i=0;i<count;i++){
+      const angle = Math.random()*Math.PI*2;
+      const speed = rand(2,6) * (0.6 + Math.random());
+      particles.push({
+        x:x, y:y,
+        vx: Math.cos(angle)*speed,
+        vy: Math.sin(angle)*speed,
+        life: rand(60,120),
+        r: rand(1.2,3.4),
+        color: color
+      });
+    }
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,fw.width,fw.height);
+    // fade background slightly to create trails
+    ctx.fillStyle = 'rgba(0,0,0,0.12)';
+    ctx.fillRect(0,0,fw.width,fw.height);
+
+    // update particles
+    for(let i=particles.length-1;i>=0;i--){
+      const p = particles[i];
+      p.vy += 0.03; // gravity small
+      p.x += p.vx;
+      p.y += p.vy;
+      p.life--;
+      ctx.beginPath();
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = Math.max(0, p.life/120);
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fill();
+      if(p.life<=0 || p.y > fw.height + 50) particles.splice(i,1);
+    }
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(draw);
+  }
+  draw();
+
+  // Launch several fireworks around the Burj top area
+  function launchSkyFireworks(){
+    const rect = scene.getBoundingClientRect();
+    // choose x positions around center
+    const cx = rect.width/2;
+    for(let i=0;i<8;i++){
+      const x = cx + rand(-rect.width*0.25, rect.width*0.25);
+      const y = rand(rect.height*0.08, rect.height*0.35);
+      const color = `hsl(${rand(0,360)},100%,60%)`;
+      setTimeout(()=>spawnFirework(x, y, color), i*220);
+    }
+  }
+
+  // Balloons: DOM elements for crisp look
+  const balloonColors = [
+    'linear-gradient(180deg,#ff7ab6,#ff5d8a)',
+    'linear-gradient(180deg,#7ee0ff,#3ab0ff)',
+    'linear-gradient(180deg,#ffd86b,#ffb94d)',
+    'linear-gradient(180deg,#c7b3ff,#8b6cff)',
+    'linear-gradient(180deg,#9ef49e,#46d05a)'
+  ];
+
+  let balloonCounter = 0;
+  function createBalloon(xPercent, delay){
+    setTimeout(()=>{
+      const el = document.createElement('div');
+      el.className = 'balloon';
+      el.style.left = xPercent + 'vw';
+      const color = balloonColors[Math.floor(rand(0, balloonColors.length))];
+      el.style.background = color;
+      const dur = rand(8,16);
+      el.style.animation = `floatUp ${dur}s linear forwards`;
+      el.style.zIndex = 40 + Math.floor(rand(0,50));
+      // slight horizontal drift via CSS animation (JS-free)
+      const drift = rand(-60,60);
+      el.animate([
+        { transform: `translateX(0px)` },
+        { transform: `translateX(${drift}px)` },
+        { transform: `translateX(0px)` }
+      ], { duration: dur*1000, iterations: Infinity });
+
+      // let user pop balloon on click/tap
+      el.style.pointerEvents = 'auto';
+      el.addEventListener('click', e=>{
+        animatePop(el);
+      });
+
+      balloonLayer.appendChild(el);
+      balloonCounter++;
+      // auto remove after duration + buffer
+      setTimeout(()=>{ if(el && el.parentNode) el.remove(); }, (dur+1)*1000 + 200);
+    }, delay||0);
+  }
+
+  function animatePop(el){
+    // simple pop: scale + fade + small confetti burst canvas
+    el.style.transition = 'transform 260ms ease, opacity 260ms ease';
+    el.style.transform = 'scale(1.6)';
+    el.style.opacity = '0';
+    // create tiny particle burst on top of balloon
+    const r = el.getBoundingClientRect();
+    burstAt((r.left + r.width/2 - scene.getBoundingClientRect().left) * devicePixelRatio,
+            (r.top + r.height/2 - scene.getBoundingClientRect().top) * devicePixelRatio);
+    setTimeout(()=>el.remove(), 300);
+  }
+
+  function burstAt(cx, cy){
+    // spawn small bright particles on main canvas (higher z)
+    for(let i=0;i<28;i++){
+      const angle = Math.random()*Math.PI*2;
+      const speed = rand(1.2,5.6);
+      particles.push({
+        x: cx / devicePixelRatio,
+        y: cy / devicePixelRatio,
+        vx: Math.cos(angle)*speed,
+        vy: Math.sin(angle)*speed - rand(0.5,2.5),
+        life: rand(24,48),
+        r: rand(1.6,3.6),
+        color: ['#fff3c7','#ffd86b','#ff8fb2','#7ee0ff'][Math.floor(rand(0,4))]
+      });
+    }
+  }
+
+  // Burj lighting: flash some 'lights' circles occasionally
+  function flashLights(){
+    lights.forEach(circle => circle.setAttribute('fill','#071b2f'));
+    const toFlash = [];
+    for(let i=0;i<6;i++){
+      toFlash.push(lights[Math.floor(rand(0, lights.length))]);
+    }
+    toFlash.forEach((c, idx)=>{
+      setTimeout(()=> c.setAttribute('fill', ['#ffd86b','#ffb86b','#7ee0ff','#ff7ab6'][Math.floor(rand(0,4))]), idx*80);
+      setTimeout(()=> c.setAttribute('fill','#071b2f'), idx*80 + 400);
+    });
+  }
+
+  // small melody using WebAudio
+  let audioCtx;
+  function playTune(){
+    if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const now = audioCtx.currentTime;
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.type = 'sine';
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start();
+    const notes = [660,660,0,660,0,523,660,784]; // short jingle
+    let t = now + 0.05;
+    notes.forEach(n=>{
+      if(n>0) o.frequency.setValueAtTime(n, t);
+      else o.frequency.setValueAtTime(0, t);
+      g.gain.setValueAtTime(n>0?0.12:0, t);
+      t += 0.18;
+    });
+    setTimeout(()=>{ g.gain.exponentialRampToValueAtTime(0.0001, t); o.stop(t+0.02); }, (t-now)*1000);
+  }
+
+  // Surprise sequence
+  let surpriseActive = false;
+  surpriseBtn.addEventListener('click', ()=>{
+    if(surpriseActive) return;
+    surpriseActive = true;
+    surpriseBtn.textContent = 'Launched ✨';
+    surpriseBtn.disabled = true;
+    // spotlight on
+    spot.classList.add('on');
+    // light building lights repeatedly
+    const lightInterval = setInterval(flashLights, 480);
+    // balloons: release in waves from around center
+    const waves = 6;
+    const perWave = 8;
+    for(let w=0; w<waves; w++){
+      for(let i=0;i<perWave;i++){
+        const x = 45 + rand(-32,32); // vw
+        createBalloon(x, (w*perWave + i) * 140);
+      }
+    }
+    // fireworks start after short delay
+    setTimeout(()=>{
+      launchSkyFireworks();
+      // repeat fireworks a few times
+      const fwI = setInterval(launchSkyFireworks, 1400);
+      // stop after 8 seconds
+      setTimeout(()=>{ clearInterval(fwI); }, 8000);
+    }, 900);
+
+    // small timed bursts and lights
+    setTimeout(()=>{ burstAt(scene.clientWidth*0.5*devicePixelRatio, scene.clientHeight*0.18*devicePixelRatio); }, 1200);
+    const flashI = setInterval(flashLights, 700);
+    setTimeout(()=>{ clearInterval(flashI); clearInterval(lightInterval); }, 9000);
+
+    // play a short tune
+    playTune();
+
+    // re-enable reset after some time
+    setTimeout(()=>{ resetBtn.disabled = false; }, 1000);
+  });
+
+  // Reset: clear particles, balloons, lights, spotlight
+  resetBtn.addEventListener('click', ()=>{
+    surpriseActive = false;
+    surpriseBtn.textContent = '✨ Surprise';
+    surpriseBtn.disabled = false;
+    // remove balloons
+    balloonLayer.querySelectorAll('.balloon').forEach(b=>b.remove());
+    // clear particles
+    particles = [];
+    // turn off spotlight
+    spot.classList.remove('on');
+    // reset lights
+    lights.forEach(c=>c.setAttribute('fill','#071b2f'));
+  });
+
+  // Extra: clicking on scene pops any balloon under pointer (bubble pop)
+  scene.addEventListener('click', (ev)=>{
+    const target = ev.target;
+    // if click on anywhere non-button, try pop topmost balloon
+    if(target.classList && target.classList.contains('balloon')){
+      animatePop(target);
+    }
+  });
+
+  // periodic small fireworks ambient (off until surprise)
+  // finalize: ensure canvas resizes immediately
+  setTimeout(resize, 100);
+
+  // expose a manual function (helpful if needed)
+  window._createBalloon = createBalloon;
+})();
 </script>
 </body>
 </html>
