@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Vikas Deshwal Trading Company</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: #f5f6fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Navigation Bar */
+    nav {
+      background: linear-gradient(90deg, #009688, #00796b);
+      padding: 0.8rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
+
+    nav .logo {
+      color: white;
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      color: #e0f7fa;
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      height: 3px;
+      width: 25px;
+      background: white;
+      margin: 4px 0;
+      border-radius: 2px;
+    }
+
+    /* Hero Section */
+    header.hero {
+      background: linear-gradient(135deg, #009688, #00796b);
+      color: white;
+      text-align: center;
+      padding: 100px 20px 60px;
+      border-bottom-left-radius: 40px;
+      border-bottom-right-radius: 40px;
+    }
+
+    header.hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    header.hero p {
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
+
+    /* About Section */
+    .about-section {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 0 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .about-text {
+      flex: 1 1 500px;
+    }
+
+    .about-text h2 {
+      color: #00796b;
+      margin-bottom: 20px;
+      font-size: 2rem;
+    }
+
+    .about-text p {
+      font-size: 1rem;
+      margin-bottom: 15px;
+    }
+
+    .about-image {
+      flex: 1 1 400px;
+    }
+
+    .about-image img {
+      width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+
+    /* Features / Values Section */
+    .features {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 0 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+
+    .feature-item {
+      background: #fff;
+      flex: 1 1 250px;
+      max-width: 300px;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feature-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .feature-item h3 {
+      color: #009688;
+      margin-bottom: 10px;
+    }
+
+    .feature-item p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #00796b;
+      color: #fff;
+      font-size: 0.9rem;
+      margin-top: 60px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header.hero h1 {
+        font-size: 2rem;
+      }
+
+      .about-section {
+        flex-direction: column;
+      }
+
+      .about-image, .about-text {
+        flex: 1 1 100%;
+      }
+
+      nav ul {
+        display:flex;
+        flex-direction:flex;
+        width: 100%;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      nav ul.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav>
+
+    <div class="menu-toggle" id="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <ul id="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="aboutus.html" class="active">About Us</a></li>
+      <li><a href="contactus.html">Contact Us</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <h1>About Vikas Deshwal Trading Company</h1>
+    <p>We are a trusted distributor and wholesaler of high-quality products. Our mission is to provide reliable products with unbeatable service to our customers.</p>
+  </header>
+
+  <!-- About Section -->
+  <section class="about-section">
+    <div class="about-text">
+      <h2>Our Story</h2>
+      <p>Founded by Vikas Deshwal, our company has grown from a small local supplier to a trusted trading partner for distributors and retailers across the region. We pride ourselves on quality, reliability, and customer satisfaction.</p>
+      <p>Our team works tirelessly to ensure our products meet the highest standards, while offering flexible rates and excellent service to all our clients.</p>
+    </div>
+    <div class="about-image">
+      <img src="vikas_deshwal_logo-removebg-preview.png" alt="Vikas Deshwal Trading Company">
+    </div>
+  </section>
+
+  <!-- Features / Values -->
+  <section class="features">
+    <div class="feature-item">
+      <h3>Quality Products</h3>
+      <p>We supply only high-quality products that are durable and reliable.</p>
+    </div>
+    <div class="feature-item">
+      <h3>Customer Support</h3>
+      <p>Our team is always ready to assist distributors and retailers with any queries.</p>
+    </div>
+    <div class="feature-item">
+      <h3>Wholesale Rates</h3>
+      <p>Flexible and competitive pricing for distributors and bulk buyers.</p>
+    </div>
+    <div class="feature-item">
+      <h3>Trust & Reliability</h3>
+      <p>Our reputation is built on years of providing trustworthy and timely service.</p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Vikas Deshwal Trading Company. All Rights Reserved.
+  </footer>
+
+  <!-- Navbar Toggle Script -->
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
+
+</body>
+</html>
