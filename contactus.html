@@ -318,26 +318,10 @@
       navLinks.classList.toggle('active');
     });
   </script>
-  <form id="myForm">
-  <input name="name" placeholder="Name" required />
-  <input name="phone" placeholder="Phone" required />
-  <textarea name="message" placeholder="Message"></textarea>
-  <button type="submit">Send via WhatsApp</button>
-</form>
-
-<script>
-document.getElementById('myForm').addEventListener('submit', function(e){
-  e.preventDefault();
-  const fd = new FormData(e.target);
-  const name = encodeURIComponent(fd.get('name'));
-  const phone = fd.get('phone').replace(/\D/g,''); // numeric only
-  const msg = encodeURIComponent(New submission\nName: ${name}\nPhone: ${phone}\nMessage: ${encodeURIComponent(fd.get('message'))});
-  // wa.me link - user must click "Send"
-  window.open(https://wa.me/${phone}?text=${msg}, '_blank');
-});
-</script>
+ 
 </body>
 </html>
+
 
 
 
