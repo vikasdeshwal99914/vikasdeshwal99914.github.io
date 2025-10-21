@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bright Future Foundation | NGO for Education & Hope</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: #f9fafb;
+  color: #333;
+  scroll-behavior: smooth;
+}
+
+/* ---------- NAVIGATION ---------- */
+nav {
+  background: #004d40;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+nav h1 {
+  font-size: 1.8em;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+}
+
+nav a:hover {
+  color: #ffcc00;
+}
+
+/* ---------- HERO SECTION ---------- */
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  background: #e8f5e9;
+}
+
+.hero img {
+  width: 400px;
+  max-width: 90%;
+  border-radius: 15px;
+  margin: 20px;
+}
+
+.hero .text {
+  max-width: 500px;
+  padding: 20px;
+}
+
+.hero h2 {
+  color: #004d40;
+  font-size: 2.5em;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  font-size: 1.05em;
+  line-height: 1.8;
+  color: #444;
+}
+
+.hero button {
+  margin-top: 25px;
+  padding: 12px 28px;
+  background: #ffcc00;
+  color: #004d40;
+  border: none;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.hero button:hover {
+  background: #f1b000;
+  transform: scale(1.05);
+}
+
+/* ---------- ABOUT SECTION ---------- */
+section {
+  width: 90%;
+  max-width: 1100px;
+  margin: 60px auto;
+  background: white;
+  padding: 50px;
+  border-radius: 15px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+section h2 {
+  color: #004d40;
+  font-size: 1.9em;
+  border-left: 6px solid #ffcc00;
+  padding-left: 10px;
+  margin-bottom: 20px;
+}
+
+section p {
+  line-height: 1.8;
+  color: #444;
+  font-size: 1.05em;
+}
+
+/* ---------- IMPACT SECTION ---------- */
+.impact-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 30px;
+}
+
+.impact-box {
+  background: #e0f2f1;
+  padding: 25px;
+  border-radius: 10px;
+  text-align: center;
+  width: 230px;
+  margin: 10px;
+}
+
+.impact-box h3 {
+  font-size: 2em;
+  color: #004d40;
+}
+
+.impact-box p {
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+/* ---------- PROJECT SECTION ---------- */
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 25px;
+}
+
+.project {
+  background: #f9fbe7;
+  border-radius: 10px;
+  padding: 20px;
+  transition: 0.3s;
+}
+
+.project:hover {
+  transform: translateY(-6px);
+  background: #fff9c4;
+}
+
+.project img {
+  width: 100%;
+  border-radius: 10px;
+  height: 180px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+/* ---------- STORIES SECTION ---------- */
+.story {
+  background: #f1f8e9;
+  border-left: 6px solid #004d40;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.story h3 {
+  color: #004d40;
+  margin-bottom: 10px;
+}
+
+/* ---------- CONTACT ---------- */
+.contact {
+  text-align: center;
+}
+
+.contact p {
+  margin: 8px 0;
+  font-size: 1.05em;
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  background: #00251a;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 50px;
+  font-size: 0.95em;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+  section {
+    padding: 30px 20px;
+  }
+  nav {
+  flex-direction:column;
+  margin-left:5px;
+  margin-right:5px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <h1>Bright Future Foundation</h1>
+  <ul>
+    <li><a href="indexteacher.html">Home</a></li>
+    <li><a href="aboutusteacher.html">About</a></li>
+    <li><a href="allteacher.html"> Teachers</a></li>
+    <li><a href="contactteacher.html">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <img src="/images/student1.png" alt="Children learning together">
+  <div class="text">
+    <h2>Building a Brighter Future for Every Child</h2>
+    <p>At Bright Future Foundation, we believe education is the key to breaking the cycle of poverty. We work tirelessly to provide access to learning, nutrition, and emotional support for children in rural and urban slum areas.</p>
+    <button><a href="contactteacher.html" style="font-size:130%;text-decoration:none;">Get Involved</a></button>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <h2>About Our NGO</h2>
+  <p>Founded in 2025, Bright Future Foundation is a non-profit dedicated to transforming the lives of underprivileged children and youth through education, mentorship, and sustainable community programs. We partner with local schools, volunteers, and organizations to ensure that every child has a chance to learn, grow, and dream.</p>
+</section>
+
+<!--&lt;!&ndash; IMPACT &ndash;&gt;-->
+<!--<section id="impact">-->
+<!--  <h2>Our Impact</h2>-->
+<!--  <div class="impact-stats">-->
+<!--    <div class="impact-box">-->
+<!--      <h3>12+</h3>-->
+<!--      <p>Years of Service</p>-->
+<!--    </div>-->
+<!--    <div class="impact-box">-->
+<!--      <h3>5,000+</h3>-->
+<!--      <p>Children Educated</p>-->
+<!--    </div>-->
+<!--    <div class="impact-box">-->
+<!--      <h3>100+</h3>-->
+<!--      <p>Schools Partnered</p>-->
+<!--    </div>-->
+<!--    <div class="impact-box">-->
+<!--      <h3>350+</h3>-->
+<!--      <p>Active Volunteers</p>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
+
+<!-- PROJECTS -->
+<section id="projects">
+  <h2>Our Key Projects</h2>
+  <div class="projects">
+    <div class="project">
+      <img src="https://www.mdpi.com/education/education-14-00866/article_deploy/html/images/education-14-00866-g001.png" style="width:300px;height:250px;" alt="Education Drive">
+      <h3>Education Drive</h3>
+      <p>Establishing learning centers in underprivileged communities to support children’s education with modern teaching tools.</p>
+    </div>
+    <div class="project">
+      <img src="https://cdn-res.keymedia.com/cms/images/ca/126/0395_638157039388692529.jpg" alt="Health Support">
+      <h3>Child Health Support</h3>
+      <p>Regular health checkups, nutrition programs, and psychological counseling for children from marginalized backgrounds.</p>
+    </div>
+    <div class="project">
+      <img src="https://opscstudy.com/wp-content/uploads/2024/11/Women-Empowerment_11zon-1-1024x595.jpg" alt="Women Empowerment">
+      <h3>Women Empowerment</h3>
+      <p>Training women to become educators, mentors, and community leaders to promote long-term sustainable development.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STORIES -->
+<section id="stories">
+  <h2>Inspiring Stories</h2>
+  <div class="story">
+    <h3>🌟 Rina’s Journey</h3>
+    <p>Rina, a 10-year-old from Delhi, once struggled to attend school. Today, she dreams of becoming a doctor, thanks to the foundation’s support for her education and medical needs.</p>
+  </div>
+  <div class="story">
+    <h3>🌟 Sunil’s Dream</h3>
+    <p>Sunil, a former child laborer, now mentors younger children in his community after completing his schooling through “Education for All” program.</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <h2>Contact Us</h2>
+  <p>📍 Omax city , sonipat, Haryana, India</p>
+  <p>📞 +91 8607794578</p>
+  <p><a href="contactteacher.html">Contact us</a> </p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  © 2025 Bright Future Foundation | Empowering Through Education
+</footer>
+
+</body>
+</html>
