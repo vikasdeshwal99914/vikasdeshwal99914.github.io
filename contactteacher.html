@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | Vikas Deshwal Trading Company</title>
+  <style>
+    /* Reset & Base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: #f5f6fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Navigation Bar */
+    nav {
+      background: linear-gradient(90deg, #009688, #00796b);
+      padding: 0.8rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
+
+    nav .logo {
+      color: white;
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: underline;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #e0f7fa;
+    }
+
+    /* Responsive Navbar Toggle */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      height: 3px;
+      width: 25px;
+      background: white;
+      margin: 4px 0;
+      border-radius: 2px;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(90deg, #009688, #00796b);
+      color: #fff;
+      text-align: center;
+      padding: 2rem 1rem;
+      border-bottom-left-radius: 40px;
+      border-bottom-right-radius: 40px;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      letter-spacing: 1px;
+    }
+
+    /* Contact Section */
+    .contact-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 20px;
+      gap: 30px;
+    }
+
+    .contact-info,
+    .contact-form {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      flex: 1 1 350px;
+      max-width: 500px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .contact-info:hover,
+    .contact-form:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+    }
+
+    .contact-info h2,
+    .contact-form h2 {
+      color: #00796b;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #00796b;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    .info-item {
+      margin: 15px 0;
+      font-size: 0.95rem;
+    }
+
+    .info-item strong {
+      display: inline-block;
+      width: 90px;
+      color: #00796b;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    label {
+      font-weight: 600;
+      color: #555;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      resize: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #009688;
+      outline: none;
+      box-shadow: 0 0 6px rgba(0, 150, 136, 0.25);
+    }
+
+    button {
+      background: #00796b;
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #009688;
+    }
+
+    /* Map */
+    .map-container {
+      width: 100%;
+      height: 350px;
+      margin: 40px 0;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #00796b;
+      color: #fff;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 1.6rem;
+      }
+
+      .contact-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .contact-info,
+      .contact-form {
+        width: 100%;
+        max-width: 600px;
+      }
+
+      nav ul {
+        display:flex;
+        flex-direction:flex;
+        width: 100%;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      nav ul.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav>
+
+    <div class="menu-toggle" id="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <ul id="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="aboutusteacher.html">About </a></li>
+      <li><a href="allteacher.html">Teachers</a></li>
+      <li><a href="contactteacher.html">Contact Us</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <h1>Contact Us -Bright Future Foundation </h1>
+  </header>
+
+  <section class="contact-container">
+    <div class="contact-info">
+      <h2>Get in Touch</h2>
+      <div class="info-item"><strong>Address:</strong> Omax city,sonipat, Haryana, India</div>
+      <div class="info-item"><a href="tel:+918607794578" style="font-size:110%;color: #00796b;text-decoration:none;">mobile no  &#128222;- 8607794578</a></div>
+
+      <div class="info-item"><strong>Hours:</strong> Mon - Sat, 9:00 AM - 6:00 PM</div>
+              <div class="info-item"><strong><a href="mailto:vikasdeshwal1996@gmail.com" style="font-size:110%;color: #00796b;text-decoration:none;">Send email</a></strong></div>
+
+              <div class="info-item" ><a href="Https://wa.me/918607794578"> <img src="WhatsApp-MonochromeWithName2-Logo.wine.png" alt="check the image" style="width:220px;height:160px;"> </a></div>
+
+    </div>
+
+    <div class="contact-form">
+      <h2>Send a Message</h2>
+      <form autocomplete="on" action="#" method="post">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Your Name" required autocomplete="name" />
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="Your Email" required autocomplete="email" />
+
+        <label for="mobile">Mobile Number</label>
+        <input type="tel" id="mobile" name="mobile" placeholder="Your Mobile Number" pattern="[0-9]{10}" maxlength="10" required autocomplete="tel" />
+
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" name="subject" placeholder="Subject" required />
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <div class="map-container">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.8070160178074!2d77.04004077549754!3d28.607320275677698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d058a16d86e1b%3A0x91f3e1d91e9dc1e1!2sNew%20Delhi!5e0!3m2!1sen!2sin!4v1696761272028!5m2!1sen!2sin"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+
+  <footer>
+    &copy; 2025 Vikas Deshwal Trading Company. All Rights Reserved.
+  </footer>
+
+  <!-- Navbar Toggle Script -->
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
+
+
