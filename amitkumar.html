@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teacher Portfolio | </title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: #f3f4f6;
+  color: #333;
+  scroll-behavior: smooth;
+}
+
+/* ---------- NAVIGATION ---------- */
+nav {
+  background: linear-gradient(90deg, #4f46e5, #6366f1);
+  color: white;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+nav h1 {
+  font-size: 1.6em;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- HEADER SECTION ---------- */
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #6366f1, #a5b4fc);
+  color: white;
+  padding: 60px 20px;
+}
+
+.header img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 5px solid white;
+  margin-right: 30px;
+  object-fit: cover;
+}
+
+.header .intro {
+  max-width: 600px;
+}
+
+.header h2 {
+  font-size: 2em;
+}
+
+.header h4 {
+  margin-top: 10px;
+  font-weight: 400;
+}
+
+/* ---------- SECTION STYLES ---------- */
+section {
+  padding: 60px 50px;
+  background: white;
+  margin: 20px auto;
+  width: 90%;
+  max-width: 1100px;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+section h2 {
+  color: #4f46e5;
+  border-left: 6px solid #6366f1;
+  padding-left: 10px;
+  font-size: 1.8em;
+  margin-bottom: 20px;
+}
+
+section p, section ul {
+  font-size: 1em;
+  line-height: 1.8;
+  color: #444;
+}
+
+ul li {
+  margin-left: 20px;
+  margin-bottom: 8px;
+}
+
+/* ---------- GALLERY ---------- */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+.gallery img {
+  width: 100%;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+}
+
+/* ---------- CONTACT FORM ---------- */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+input, textarea {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1em;
+  width: 100%;
+}
+
+button {
+  background: #4f46e5;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+button:hover {
+  background: #4338ca;
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  background: #1e1b4b;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  margin-top: 30px;
+  font-size: 0.9em;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width: 768px) {
+  .header {
+    flex-direction: column;
+    text-align: center;
+  }
+  .header img {
+    margin-bottom: 20px;
+  }
+  nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <h1>Dr. Amit Kumar </h1>
+  <ul>
+    <li><a href="indexteacher.html">Home</a></li>
+    <li><a href="allteacher.html"> Teachers</a></li>
+    <li><a href="aboutusteacher.html">About</a></li>
+    <li><a href="contactteacher.html">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HEADER -->
+<div class="header">
+  <img src="/images/WhatsApp Image 2025-10-23 at 11.10.13_e08b096a.jpg" alt="Teacher Photo">
+  <div class="intro">
+    <h2>Dr. Amit Kumar</h2>
+    <h4>Senior Chemistry Educator</h4>
+    <p>Transforming young minds through creativity, empathy, and modern education practices. With 10 years of experience in teaching and mentoring, I believe in nurturing confidence through learning.</p>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <h2>About Me</h2>
+     <li><strong>Senior Chemistry Teacher</strong> – Aaryan Sen. Sec. School Kurana, Israna, panipat as chemistry lecturer  </li>
+    <br>
+  <p>I am a passionate teacher who loves to create a classroom environment that inspires curiosity and confidence. Over the years, I’ve worked with hundreds of students to enhance their communication and comprehension abilities. I integrate technology, and storytelling to make chemistry learning a joyful experience.</p>
+</section>
+
+<!-- QUALIFICATIONS -->
+<section id="qualifications">
+  <h2>Academic Qualifications</h2>
+  <ul>
+    <li><strong>Ph.D-(Organic Synthesis)</strong> -JS University, Shikohabad</li>
+    <li><strong>Msc. (Chemistry)-</strong>Dr. Bhim Rao Ambedkar University,Agra</li>
+    <li><strong>B.Ed. – </strong>Kurukshetra University </li>
+    <li><strong>Bsc.(Gen)- </strong>Dr. Bhim Rao Ambedkar University,Agra</li>
+  </ul>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <h2>Experience</h2>
+  <ul>
+    <li><strong>1 year worked as assistant professor (chemistry department)
+</strong> –  (R&D department) Madina Pharmaceuticals Pvt Ltd</li>
+          <li><strong>2014 to 2020  worked as chemistry lacture as well as vice principal at</strong> –  Janta Sen. Sec. School Gannaur, Sonipat </li>
+
+  </ul>
+</section>
+
+<!-- PHILOSOPHY -->
+<section id="philosophy">
+  <h2>Teaching Philosophy</h2>
+  <p>I believe teaching should not be limited to textbooks. My philosophy revolves around:</p>
+  <ul>
+    <li>Encouraging critical thinking over rote learning.</li>
+    <li>Blending emotional intelligence with academic excellence.</li>
+    <li>Adapting modern technology tools like interactive quizzes and online discussion forums.</li>
+    <li>Creating inclusive learning spaces for all students.</li>
+  </ul>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  2025 Bright Future Foundation | 📞 +91 8607794578
+</footer>
+
+</body>
+</html>
