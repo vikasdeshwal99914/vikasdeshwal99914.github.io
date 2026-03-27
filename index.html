@@ -3,105 +3,71 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UPI Payment</title>
+<title>Simple UPI Payment Page</title>
 
 <style>
-body{
-  margin:0;
-  font-family:Arial;
-  background:#f3f4f6;
-  text-align:center;
-}
+*{box-sizing:border-box;font-family:Arial}
+body{margin:0;background:#f3f4f6}
+h1{text-align:center;padding:20px}
 
-.card{
-  background:#fff;
-  width:300px;
-  margin:80px auto;
-  padding:25px;
-  border-radius:14px;
-  box-shadow:0 4px 12px rgba(0,0,0,.1);
-}
-
-.price{
-  font-size:26px;
-  margin:10px 0 20px;
-}
-
-button{
-  padding:12px 18px;
-  border:none;
-  border-radius:8px;
-  background:#2563eb;
-  color:#fff;
-  font-size:16px;
-  cursor:pointer;
-}
+.container{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;padding:20px}
+.card{background:white;padding:20px;border-radius:14px;box-shadow:0 4px 12px rgba(0,0,0,0.1);text-align:center}
+.price{font-size:22px;margin:10px 0}
+button{padding:10px 15px;border:none;border-radius:8px;background:#2563eb;color:white;font-size:16px;cursor:pointer}
 button:hover{background:#1d4ed8}
 
 /* popup */
-.popup{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.6);
-  display:none;
-  align-items:center;
-  justify-content:center;
-}
-.popup-box{
-  background:#fff;
-  padding:25px;
-  border-radius:14px;
-  width:300px;
-}
-.app-btn{width:100%;margin:8px 0}
-.cancel{background:#ddd;color:#000}
+.popup{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center}
+.popup-content{background:white;padding:25px;border-radius:14px;text-align:center;width:320px}
+.app-btn{display:block;width:100%;margin:10px 0}
+.cancel{background:#ddd;color:black}
 </style>
 </head>
 
 <body>
+<h1>UPI Payment Demo</h1>
+ <div class="card">
+    <h2>Subscription Amount</h2>
+    <div class="price"></div>
+    <button onclick="payNow('products')">Pay Amount</button>
+  </div>
 
-<div class="card">
-  <h2>Subscription</h2>
-  <div class="price">₹2000</div>
-  <button onclick="showPopup()">Pay Now</button>
-</div>
-
-<!-- Popup -->
+<!-- Payment Popup -->
 <div class="popup" id="popup">
-  <div class="popup-box">
-    <h3>Select UPI App</h3>
+  <div class="popup-content">
+    <h2>Select Payment App</h2>
+    <p id="paymentText"></p>
 
-    <button class="app-btn" onclick="pay('default')">Any UPI App</button>
-    <button class="app-btn" onclick="pay('gpay')">Google Pay</button>
-    <button class="app-btn" onclick="pay('phonepe')">PhonePe</button>
+    <button class="app-btn" onclick="openUPI()">Pay with Paytm</button>
+    <button class="app-btn" onclick="openUPI()">Pay with Google Pay</button>
+    <button class="app-btn" onclick="openUPI()">Pay with PhonePe</button>
 
     <button class="app-btn cancel" onclick="closePopup()">Cancel</button>
   </div>
 </div>
 
 <script>
-const amount = 2000;
-const upiId = "8607794578@ybl";
-const payeeName = "MyShop";
-const note = "Subscription Payment";
+let amount = 0;
+let productName = '';
 
-function showPopup(){
-  document.getElementById("popup").style.display="flex";
+const upiId = "8607794578@ybl"; // 🔴 Replace with your real UPI ID
+const payeeName = "MyShop";
+
+function payNow(name, price){
+  amount = price;
+  productName = name;
+  document.getElementById('paymentText').innerText = `Pay ₹${price} for ${name}`;
+  document.getElementById('popup').style.display='flex';
 }
 
 function closePopup(){
-  document.getElementById("popup").style.display="none";
+  document.getElementById('popup').style.display='none';
 }
 
-function pay(app){
-  const base = `upi://pay?pa=${upiId}&pn=${payeeName}&am=${amount}&cu=INR&tn=${note}`;
-
-  if(app==="gpay")
-    window.location.href=`tez://upi/pay?pa=${upiId}&pn=${payeeName}&am=${amount}&cu=INR&tn=${note}`;
-  else if(app==="phonepe")
-    window.location.href=`phonepe://pay?pa=${upiId}&pn=${payeeName}&am=${amount}&cu=INR&tn=${note}`;
-  else
-    window.location.href=base;
+function openUPI(){
+  const note = `Payment for ${productName}`;
+  const url = `upi://pay?pa=${upiId}&pn=${payeeName}&am=${amount}&cu=INR&tn=${note}`;
+  window.location.href = url;
 }
 </script>
 
