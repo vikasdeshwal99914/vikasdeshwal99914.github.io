@@ -3,73 +3,112 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Simple UPI Payment Page</title>
-
+<title>Loan + UPI Payment</title>
 <style>
-*{box-sizing:border-box;font-family:Arial}
-body{margin:0;background:#f3f4f6}
-h1{text-align:center;padding:20px}
-
-.container{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;padding:20px}
-.card{background:white;padding:20px;border-radius:14px;box-shadow:0 4px 12px rgba(0,0,0,0.1);text-align:center}
-.price{font-size:22px;margin:10px 0}
-button{padding:10px 15px;border:none;border-radius:8px;background:#2563eb;color:white;font-size:16px;cursor:pointer}
+body{font-family:Arial;background:#f3f4f6;margin:0}
+.container{max-width:420px;margin:auto;padding:20px}
+.card{background:#fff;padding:20px;border-radius:14px;box-shadow:0 5px 15px rgba(0,0,0,.1);margin-top:20px}
+input,select,textarea{width:100%;padding:10px;margin:8px 0;border-radius:8px;border:1px solid #ccc}
+button{width:100%;padding:12px;border:none;border-radius:8px;background:#2563eb;color:#fff;font-size:16px;cursor:pointer}
 button:hover{background:#1d4ed8}
-
-/* popup */
-.popup{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center}
-.popup-content{background:white;padding:25px;border-radius:14px;text-align:center;width:320px}
-.app-btn{display:block;width:100%;margin:10px 0}
-.cancel{background:#ddd;color:black}
+.plan{border:2px solid #eee;padding:12px;border-radius:10px;margin:10px 0;cursor:pointer}
+.plan.active{border-color:#2563eb;background:#eff6ff}
+.popup{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center}
+.popup-box{background:#fff;padding:20px;border-radius:12px;width:300px;text-align:center}
+.app-btn{margin:6px 0}
+.success{display:none;color:green;text-align:center}
 </style>
 </head>
-
 <body>
-<h1>UPI Payment Demo</h1>
- <div class="card">
-    <h2>Subscription Amount</h2>
-    <div class="price"></div>
-    <button onclick="payNow('products')">Pay Amount</button>
-  </div>
+<div class="container">
+
+<div class="card">
+<h2>Loan Application</h2>
+<form id="loanForm">
+<input id="name" placeholder="Full Name" required>
+<input id="phone" placeholder="Phone Number" required>
+<input id="email" placeholder="Email" required>
+<input id="amount" placeholder="Loan Amount" required>
+<select id="type" required>
+<option value="">Loan Type</option>
+<option>Personal Loan</option>
+<option>Home Loan</option>
+<option>Car Loan</option>
+<option>Business Loan</option>
+</select>
+<textarea id="address" placeholder="Address" required></textarea>
+<button type="submit">Continue to Payment</button>
+</form>
+</div>
+
+<div class="card" id="planSection" style="display:none">
+<h3>Select Plan</h3>
+<div class="plan" onclick="selectPlan(2000,this)">Premium Plan – ₹2000</div>
+<button onclick="showPopup()">Pay Now</button>
+</div>
+
+<p class="success" id="successMsg">Payment Successful 🎉 Our team will contact you on WhatsApp.</p>
+</div>
 
 <!-- Payment Popup -->
 <div class="popup" id="popup">
-  <div class="popup-content">
-    <h2>Select Payment App</h2>
-    <p id="paymentText"></p>
-
-    <button class="app-btn" onclick="openUPI()">Pay with Paytm</button>
-    <button class="app-btn" onclick="openUPI()">Pay with Google Pay</button>
-    <button class="app-btn" onclick="openUPI()">Pay with PhonePe</button>
-
-    <button class="app-btn cancel" onclick="closePopup()">Cancel</button>
-  </div>
+<div class="popup-box">
+<h3>Pay via UPI</h3>
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=8607794578@ybl"/>
+<button class="app-btn" onclick="pay('default')">Any UPI App</button>
+<button class="app-btn" onclick="pay('gpay')">Google Pay</button>
+<button class="app-btn" onclick="pay('phonepe')">PhonePe</button>
+<button class="app-btn" onclick="closePopup()" style="background:#ddd;color:#000">Cancel</button>
+</div>
 </div>
 
 <script>
-let amount = 0;
-let productName = '';
+let selectedAmount=0;
+const upiId="8607794578@ybl";
+const payeeName="LoanService";
 
-const upiId = "8607794578@ybl"; // 🔴 Replace with your real UPI ID
-const payeeName = "MyShop";
-
-function payNow(name, price){
-  amount = price;
-  productName = name;
-  document.getElementById('paymentText').innerText = `Pay ₹${price} for ${name}`;
-  document.getElementById('popup').style.display='flex';
+// FORM SUBMIT -> SHOW PLANS
+document.getElementById("loanForm").onsubmit=(e)=>{
+ e.preventDefault();
+ document.getElementById("planSection").style.display="block";
+ window.scrollTo(0,document.body.scrollHeight);
 }
 
-function closePopup(){
-  document.getElementById('popup').style.display='none';
+function selectPlan(amount,el){
+ selectedAmount=amount;
+ document.querySelectorAll('.plan').forEach(p=>p.classList.remove('active'));
+ el.classList.add('active');
 }
 
-function openUPI(){
-  const note = `Payment for ${productName}`;
-  const url = `upi://pay?pa=${upiId}&pn=${payeeName}&am=${amount}&cu=INR&tn=${note}`;
-  window.location.href = url;
+function showPopup(){
+ if(!selectedAmount){alert("Please select a plan");return}
+ document.getElementById("popup").style.display="flex";
+}
+function closePopup(){document.getElementById("popup").style.display="none"}
+
+function pay(app){
+ const note="Loan Processing Fee";
+ const base=`upi://pay?pa=${upiId}&pn=${payeeName}&am=${selectedAmount}&cu=INR&tn=${note}`;
+ if(app==='gpay') window.location.href=`tez://upi/pay?pa=${upiId}&pn=${payeeName}&am=${selectedAmount}&cu=INR&tn=${note}`;
+ else if(app==='phonepe') window.location.href=`phonepe://pay?pa=${upiId}&pn=${payeeName}&am=${selectedAmount}&cu=INR&tn=${note}`;
+ else window.location.href=base;
+
+ setTimeout(()=>{
+   document.getElementById("popup").style.display="none";
+   document.getElementById("successMsg").style.display="block";
+   sendWhatsApp();
+ },4000);
+}
+
+function sendWhatsApp(){
+ const name=document.getElementById('name').value;
+ const phone=document.getElementById('phone').value;
+ const email=document.getElementById('email').value;
+ const loan=document.getElementById('amount').value;
+ const type=document.getElementById('type').value;
+ const msg=`Loan Application:%0AName:${name}%0APhone:${phone}%0AEmail:${email}%0ALoan:${loan}%0AType:${type}%0APlan Paid:₹${selectedAmount}`;
+ window.open(`https://wa.me/91XXXXXXXXXX?text=${msg}`,'_blank');
 }
 </script>
-
 </body>
 </html>
