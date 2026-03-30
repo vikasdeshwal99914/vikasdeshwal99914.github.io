@@ -3,259 +3,112 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Weight Loss Plan</title>
-
+<title>Loan + UPI Payment</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#f4f4f4;color:#222;scroll-behavior:smooth}
-section{padding:60px 20px}
-h1,h2{text-align:center;margin-bottom:20px}
-.container{max-width:1100px;margin:auto}
-
-.hero{
-background:url("https://images.unsplash.com/photo-1546483875-ad9014c88eba") center/cover;
-color:white;text-align:center;padding:120px 20px
-}
-.hero h1{font-size:45px;text-shadow:2px 2px 6px #000}
-.btn{background:black;color:white;padding:15px 25px;border:none;margin-top:20px;cursor:pointer;font-size:18px;border-radius:6px}
-.btn:hover{background:#333}
-
-.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
-.gallery img{width:100%;height:250px;object-fit:cover;border-radius:12px}
-
-.quotes{background:#0c8f4f;color:white;text-align:center;padding:40px;border-radius:10px}
-.quote{margin:15px;font-size:22px;font-weight:bold}
-
-table{width:100%;border-collapse:collapse;margin:20px 0}
-th,td{border:1px solid #ddd;padding:10px;text-align:center}
-th{background:#0c8f4f;color:white}
-
-.steps{display:flex;gap:20px;flex-wrap:wrap;justify-content:center}
-.step{background:white;padding:20px;border-radius:10px;width:300px;text-align:center}
-
-.testimonials{display:flex;gap:20px;flex-wrap:wrap;justify-content:center}
-.testimonial{background:white;padding:20px;border-radius:10px;width:300px}
-
-.pricing{background:#0c8f4f;color:white;text-align:center;border-radius:10px;padding:30px}
-.price{font-size:40px;margin:10px 0}
-
-form{background:white;padding:30px;border-radius:10px}
-input,select,textarea{width:100%;padding:10px;margin:10px 0;border:1px solid #ccc;border-radius:5px}
-
-footer{background:black;color:white;text-align:center;padding:20px;margin-top:40px}
+body{font-family:Arial;background:#f3f4f6;margin:0}
+.container{max-width:420px;margin:auto;padding:20px}
+.card{background:#fff;padding:20px;border-radius:14px;box-shadow:0 5px 15px rgba(0,0,0,.1);margin-top:20px}
+input,select,textarea{width:100%;padding:10px;margin:8px 0;border-radius:8px;border:1px solid #ccc}
+button{width:100%;padding:12px;border:none;border-radius:8px;background:#2563eb;color:#fff;font-size:16px;cursor:pointer}
+button:hover{background:#1d4ed8}
+.plan{border:2px solid #eee;padding:12px;border-radius:10px;margin:10px 0;cursor:pointer}
+.plan.active{border-color:#2563eb;background:#eff6ff}
+.popup{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center}
+.popup-box{background:#fff;padding:20px;border-radius:12px;width:300px;text-align:center}
+.app-btn{margin:6px 0}
+.success{display:none;color:green;text-align:center}
 </style>
 </head>
-
 <body>
+<div class="container">
 
-<section class="hero">
-<h1>Transform Your Body & Mind</h1>
-<p>Personal diet guidance + calorie knowledge + WhatsApp support</p>
-<a href="#form"><button class="btn">Start Your Journey</button></a>
-</section>
-
-<section class="container">
-<h2>Fitness Motivation</h2>
-<div class="quotes">
-<div class="quote">“Your body can stand almost anything. It’s your mind you must convince.”</div>
-<div class="quote">“Do something today that your future self will thank you for.”</div>
-<div class="quote">“Small steps every day lead to big results.”</div>
-</div>
-</section>
-
-<section class="container">
-<h2>Start Your Fitness Journey</h2>
-<div class="gallery">
-<img src="https://images.unsplash.com/photo-1517960413843-0aee8e2b3285">
-<img src="https://images.unsplash.com/photo-1594737625785-c6902d9e3e6d">
-<img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438">
-<img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f">
-<img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5">
-<img src="https://images.unsplash.com/photo-1554284126-aa88f22d8b74">
-</div>
-</section>
-
-<section class="container">
-<section class="container">
-<h2>Calories Per 100g Food Database</h2>
-
-<h3>🥦 Vegetables</h3>
-<table>
-<tr><th>Food</th><th>Calories</th></tr>
-<tr><td>Potato</td><td>77</td></tr>
-<tr><td>Sweet Potato</td><td>86</td></tr>
-<tr><td>Onion</td><td>40</td></tr>
-<tr><td>Tomato</td><td>18</td></tr>
-<tr><td>Carrot</td><td>41</td></tr>
-<tr><td>Spinach</td><td>23</td></tr>
-<tr><td>Broccoli</td><td>34</td></tr>
-<tr><td>Cabbage</td><td>25</td></tr>
-<tr><td>Cauliflower</td><td>25</td></tr>
-<tr><td>Green Peas</td><td>81</td></tr>
-<tr><td>Capsicum</td><td>20</td></tr>
-<tr><td>Brinjal</td><td>25</td></tr>
-<tr><td>Beetroot</td><td>43</td></tr>
-<tr><td>Okra</td><td>33</td></tr>
-<tr><td>Cucumber</td><td>16</td></tr>
-<tr><td>Radish</td><td>16</td></tr>
-</table>
-
-<h3>🍎 Fruits</h3>
-<table>
-<tr><th>Food</th><th>Calories</th></tr>
-<tr><td>Apple</td><td>52</td></tr>
-<tr><td>Banana</td><td>89</td></tr>
-<tr><td>Mango</td><td>60</td></tr>
-<tr><td>Orange</td><td>47</td></tr>
-<tr><td>Papaya</td><td>43</td></tr>
-<tr><td>Grapes</td><td>69</td></tr>
-<tr><td>Pineapple</td><td>50</td></tr>
-<tr><td>Watermelon</td><td>30</td></tr>
-<tr><td>Guava</td><td>68</td></tr>
-<tr><td>Pomegranate</td><td>83</td></tr>
-<tr><td>Kiwi</td><td>61</td></tr>
-<tr><td>Strawberry</td><td>33</td></tr>
-<tr><td>Muskmelon</td><td>34</td></tr>
-</table>
-
-<h3>🌾 Grains & Staples</h3>
-<table>
-<tr><th>Food</th><th>Calories</th></tr>
-<tr><td>White Rice</td><td>130</td></tr>
-<tr><td>Brown Rice</td><td>112</td></tr>
-<tr><td>Wheat Flour</td><td>364</td></tr>
-<tr><td>Roti</td><td>120</td></tr>
-<tr><td>Oats</td><td>389</td></tr>
-<tr><td>Poha</td><td>130</td></tr>
-<tr><td>Suji</td><td>360</td></tr>
-<tr><td>Corn</td><td>86</td></tr>
-<tr><td>Quinoa</td><td>120</td></tr>
-<tr><td>Barley</td><td>354</td></tr>
-</table>
-
-<h3>🥗 Pulses & Legumes</h3>
-<table>
-<tr><th>Food</th><th>Calories</th></tr>
-<tr><td>Moong Dal</td><td>347</td></tr>
-<tr><td>Toor Dal</td><td>343</td></tr>
-<tr><td>Chana Dal</td><td>364</td></tr>
-<tr><td>Rajma</td><td>333</td></tr>
-<tr><td>Chickpeas</td><td>364</td></tr>
-<tr><td>Black Gram</td><td>341</td></tr>
-<tr><td>Masoor Dal</td><td>352</td></tr>
-<tr><td>Soya Chunks</td><td>345</td></tr>
-</table>
-
-<h3>🥛 Dairy</h3>
-<table>
-<tr><th>Food</th><th>Calories</th></tr>
-<tr><td>Milk</td><td>42</td></tr>
-<tr><td>Curd</td><td>59</td></tr>
-<tr><td>Paneer</td><td>265</td></tr>
-<tr><td>Butter</td><td>717</td></tr>
-<tr><td>Ghee</td><td>900</td></tr>
-<tr><td>Cheese</td><td>402</td></tr>
-</table>
-
-<h3>🥜 Nuts & Seeds</h3>
-<table>
-<tr><th>Food</th><th>Calories</th></tr>
-<tr><td>Almonds</td><td>579</td></tr>
-<tr><td>Peanuts</td><td>567</td></tr>
-<tr><td>Cashews</td><td>553</td></tr>
-<tr><td>Walnuts</td><td>654</td></tr>
-<tr><td>Flax Seeds</td><td>534</td></tr>
-<tr><td>Chia Seeds</td><td>486</td></tr>
-<tr><td>Pumpkin Seeds</td><td>559</td></tr>
-</table>
-
-<h3>🍛 Popular Indian Foods</h3>
-<table>
-<tr><th>Food</th><th>Calories</th></tr>
-<tr><td>Dal Tadka</td><td>180</td></tr>
-<tr><td>Vegetable Sabzi</td><td>120</td></tr>
-<tr><td>Paneer Sabzi</td><td>265</td></tr>
-<tr><td>Khichdi</td><td>150</td></tr>
-<tr><td>Upma</td><td>180</td></tr>
-<tr><td>Idli</td><td>58</td></tr>
-<tr><td>Dosa</td><td>168</td></tr>
-<tr><td>Poha</td><td>130</td></tr>
-</table>
-
-</section></section>
-
-<section class="container">
-<h2>Success Stories</h2>
-<div class="testimonials">
-<div class="testimonial">Lost 8kg in 2 months 🔥</div>
-<div class="testimonial">Energy levels doubled ⚡</div>
-<div class="testimonial">Finally confident again 💪</div>
-</div>
-</section>
-
-<section class="container">
-<div class="pricing">
-<h2>Weight Loss Plan</h2>
-<p class="price">₹2000</p>
-<p>✔ Personal calorie target<br>✔ Fat loss guidance<br>✔ WhatsApp Support</p>
-<a href="#form"><button class="btn">Subscribe Now</button></a>
-</div>
-</section>
-
-<section id="form" class="container">
-<h2>Health Form</h2>
-<form id="healthForm">
-<input type="text" id="name" placeholder="Full Name" required>
-<input type="number" id="age" placeholder="Age" required>
-<input type="number" id="height" placeholder="Height (cm)" required>
-<input type="number" id="weight" placeholder="Weight (kg)" required>
-<input type="number" id="target" placeholder="Target Weight" required>
-<textarea id="disease" placeholder="Medical Conditions"></textarea>
-<input type="tel" id="phone" placeholder="WhatsApp Number" required>
-<button type="submit" class="btn">Submit & Contact on WhatsApp</button>
+<div class="card">
+<h2>Loan Application</h2>
+<form id="loanForm">
+<input id="name" placeholder="Full Name" required>
+<input id="phone" placeholder="Phone Number" required>
+<input id="email" placeholder="Email" required>
+<input id="amount" placeholder="Loan Amount" required>
+<select id="type" required>
+<option value="">Loan Type</option>
+<option>Personal Loan</option>
+<option>Home Loan</option>
+<option>Car Loan</option>
+<option>Business Loan</option>
+</select>
+<textarea id="address" placeholder="Address" required></textarea>
+<button type="submit">Continue to Payment</button>
 </form>
-</section>
+</div>
 
-<footer>
-<p>Contact us on WhatsApp | Instagram</p>
-<p>© Weight Loss Fitness</p>
-</footer>
+<div class="card" id="planSection" style="display:none">
+<h3>Select Plan</h3>
+<div class="plan" onclick="selectPlan(2000,this)">Premium Plan – ₹2000</div>
+<button onclick="showPopup()">Pay Now</button>
+</div>
+
+<p class="success" id="successMsg">Payment Successful 🎉 Our team will contact you on WhatsApp.</p>
+</div>
+
+<!-- Payment Popup -->
+<div class="popup" id="popup">
+<div class="popup-box">
+<h3>Pay via UPI</h3>
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=8607794578@ybl"/>
+<button class="app-btn" onclick="pay('default')">Any UPI App</button>
+<button class="app-btn" onclick="pay('gpay')">Google Pay</button>
+<button class="app-btn" onclick="pay('phonepe')">PhonePe</button>
+<button class="app-btn" onclick="closePopup()" style="background:#ddd;color:#000">Cancel</button>
+</div>
+</div>
 
 <script>
+let selectedAmount=0;
+const upiId="8607794578@ybl";
+const payeeName="LoanService";
 
-document.getElementById("healthForm").addEventListener("submit", function(e){
-e.preventDefault();
+// FORM SUBMIT -> SHOW PLANS
+document.getElementById("loanForm").onsubmit=(e)=>{
+ e.preventDefault();
+ document.getElementById("planSection").style.display="block";
+ window.scrollTo(0,document.body.scrollHeight);
+}
 
-// Get all form values
-let name=document.getElementById("name").value;
-let age=document.getElementById("age").value;
-let height=document.getElementById("height").value;
-let weight=document.getElementById("weight").value;
-let target=document.getElementById("target").value;
-let disease=document.getElementById("disease").value;
-let phone=document.getElementById("phone").value;
+function selectPlan(amount,el){
+ selectedAmount=amount;
+ document.querySelectorAll('.plan').forEach(p=>p.classList.remove('active'));
+ el.classList.add('active');
+}
 
-// Format WhatsApp message
-let message = "🔥 NEW WEIGHT LOSS CLIENT 🔥%0A%0A" +
-"👤 Name: " + name + "%0A" +
-"🎂 Age: " + age + "%0A" +
-"📏 Height: " + height + " cm%0A" +
-"⚖ Current Weight: " + weight + " kg%0A" +
-"🎯 Target Weight: " + target + " kg%0A" +
-"🩺 Medical Conditions: " + disease + "%0A" +
-"📱 Client WhatsApp: " + phone + "%0A%0A" +
-"💰 Interested in ₹2000 Weight Loss Plan";
+function showPopup(){
+ if(!selectedAmount){alert("Please select a plan");return}
+ document.getElementById("popup").style.display="flex";
+}
+function closePopup(){document.getElementById("popup").style.display="none"}
 
-// 👉 CHANGE THIS NUMBER TO YOUR NUMBER
-let yourNumber = "918607794578";
+function pay(app){
+ const note="Loan Processing Fee";
+ const base=`upi://pay?pa=${upiId}&pn=${payeeName}&am=${selectedAmount}&cu=INR&tn=${note}`;
+ if(app==='gpay') window.location.href=`tez://upi/pay?pa=${upiId}&pn=${payeeName}&am=${selectedAmount}&cu=INR&tn=${note}`;
+ else if(app==='phonepe') window.location.href=`phonepe://pay?pa=${upiId}&pn=${payeeName}&am=${selectedAmount}&cu=INR&tn=${note}`;
+ else window.location.href=base;
 
-// Open WhatsApp with pre-filled message
-let url = "https://wa.me/" + yourNumber + "?text=" + message;
+ setTimeout(()=>{
+   document.getElementById("popup").style.display="none";
+   document.getElementById("successMsg").style.display="block";
+   sendWhatsApp();
+ },4000);
+}
 
-window.open(url, "_blank");
-});
+function sendWhatsApp(){
+ const name=document.getElementById('name').value;
+ const phone=document.getElementById('phone').value;
+ const email=document.getElementById('email').value;
+ const loan=document.getElementById('amount').value;
+ const type=document.getElementById('type').value;
+ const msg=`Loan Application:%0AName:${name}%0APhone:${phone}%0AEmail:${email}%0ALoan:${loan}%0AType:${type}%0APlan Paid:₹${selectedAmount}`;
+ window.open(`https://wa.me/91?text=${msg}`,'_blank');
+}
 </script>
-
-
 </body>
 </html>
