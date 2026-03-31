@@ -3,112 +3,245 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Loan + UPI Payment</title>
+<title>FitFuel Supplements</title>
+
 <style>
-body{font-family:Arial;background:#f3f4f6;margin:0}
-.container{max-width:420px;margin:auto;padding:20px}
-.card{background:#fff;padding:20px;border-radius:14px;box-shadow:0 5px 15px rgba(0,0,0,.1);margin-top:20px}
-input,select,textarea{width:100%;padding:10px;margin:8px 0;border-radius:8px;border:1px solid #ccc}
-button{width:100%;padding:12px;border:none;border-radius:8px;background:#2563eb;color:#fff;font-size:16px;cursor:pointer}
-button:hover{background:#1d4ed8}
-.plan{border:2px solid #eee;padding:12px;border-radius:10px;margin:10px 0;cursor:pointer}
-.plan.active{border-color:#2563eb;background:#eff6ff}
-.popup{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center}
-.popup-box{background:#fff;padding:20px;border-radius:12px;width:300px;text-align:center}
-.app-btn{margin:6px 0}
-.success{display:none;color:green;text-align:center}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#0f0f0f;color:#fff;scroll-behavior:smooth}
+
+/* NAVBAR */
+header{
+position:sticky;top:0;background:#000;padding:15px 40px;
+display:flex;justify-content:space-between;align-items:center;z-index:999
+}
+nav a{color:#fff;margin:0 15px;text-decoration:none;font-weight:bold}
+nav a:hover{color:#00ff88}
+.cart-count{background:#00ff88;color:#000;padding:3px 8px;border-radius:50%}
+
+/* HERO */
+.hero{
+height:80vh;display:flex;justify-content:center;align-items:center;
+text-align:center;background:url('https://images.unsplash.com/photo-1599058917765-a780eda07a3e') center/cover
+}
+.hero h1{font-size:55px;background:rgba(0,0,0,.7);padding:20px;border-radius:10px}
+
+/* PRODUCTS */
+.products{padding:50px 20px;text-align:center}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;margin-top:30px}
+.card{
+background:#1a1a1a;padding:15px;border-radius:10px;transition:.3s
+}
+.card:hover{transform:scale(1.05)}
+.card img{width:100%;height:220px;object-fit:cover;border-radius:10px;cursor:pointer}
+button{
+margin-top:10px;padding:10px;width:100%;border:none;
+background:#00ff88;font-weight:bold;cursor:pointer;border-radius:5px
+}
+button:hover{background:#00cc6a}
+
+/* CART */
+.cart{padding:40px;background:#111}
+.cart-item{display:flex;justify-content:space-between;margin:10px 0}
+.whatsapp-btn{
+background:#25D366;color:#fff;font-size:20px;margin-top:20px
+}
+
+/* MODAL */
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+background:rgba(0,0,0,.8);justify-content:center;align-items:center}
+.modal img{width:350px;border-radius:10px}
+.close{position:absolute;top:20px;right:30px;font-size:30px;cursor:pointer}
+
+/* FOOTER */
+footer{text-align:center;padding:20px;background:#000;margin-top:40px}
+
+    #searchBar{
+margin-right:20px;
+width:220px;
+outline:none;
+}
 </style>
 </head>
+
 <body>
-<div class="container">
 
-<div class="card">
-<h2>Loan Application</h2>
-<form id="loanForm">
-<input id="name" placeholder="Full Name" required>
-<input id="phone" placeholder="Phone Number" required>
-<input id="email" placeholder="Email" required>
-<input id="amount" placeholder="Loan Amount" required>
-<select id="type" required>
-<option value="">Loan Type</option>
-<option>Personal Loan</option>
-<option>Home Loan</option>
-<option>Car Loan</option>
-<option>Business Loan</option>
-</select>
-<textarea id="address" placeholder="Address" required></textarea>
-<button type="submit">Continue to Payment</button>
-</form>
-</div>
+<header>
+<h2>FitFuel 💪</h2>
+<nav>
+<input type="text" id="searchBar" placeholder="Search supplements..."
+style="padding:6px;border-radius:5px;border:none">
 
-<div class="card" id="planSection" style="display:none">
-<h3>Select Plan</h3>
-<div class="plan" onclick="selectPlan(2000,this)">Premium Plan – ₹2000</div>
-<button onclick="showPopup()">Pay Now</button>
-</div>
+<a href="#">Home</a>
+<a href="#products">Products</a>
+    <a href="#contact">Contact</a>
+<a href="#cart">Cart <span class="cart-count" id="count">0</span></a>
+</nav>
+</header>
 
-<p class="success" id="successMsg">Payment Successful 🎉 Our team will contact you on WhatsApp.</p>
-</div>
+<section class="hero">
+<h1>Build Your Dream Body 💪</h1>
+</section>
 
-<!-- Payment Popup -->
-<div class="popup" id="popup">
-<div class="popup-box">
-<h3>Pay via UPI</h3>
-<img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=8607794578@ybl"/>
-<button class="app-btn" onclick="pay('default')">Any UPI App</button>
-<button class="app-btn" onclick="pay('gpay')">Google Pay</button>
-<button class="app-btn" onclick="pay('phonepe')">PhonePe</button>
-<button class="app-btn" onclick="closePopup()" style="background:#ddd;color:#000">Cancel</button>
+<section id="products" class="products">
+<h2>Supplements at WholesSale Rate</h2>
+<div class="grid" id="productGrid"></div>
+</section>
+
+<section id="cart" class="cart">
+<h2>Your Cart</h2>
+<div id="cartItems"></div>
+<h3 id="total">Total: ₹0</h3>
+<button class="whatsapp-btn" onclick="orderWhatsApp()">Order on WhatsApp</button>
+</section>
+<div class="modal" id="modal">
+  <div style="background:#111;padding:20px;border-radius:10px;position:relative;text-align:center">
+
+    <span class="close" onclick="closeModal()"
+    style="position:absolute;top:10px;right:15px;font-size:25px;cursor:pointer">X</span>
+
+    <img id="modalImg" style="width:300px;border-radius:10px">
+    <h2 id="modalName" style="margin-top:15px"></h2>
+    <p id="modalPrice" style="color:#00ff88;font-size:20px"></p>
+
+  </div>
+</div>>
+
+
+<section id="contact" style="padding:60px 20px;text-align:center;background:#111">
+<h2>Contact Us</h2>
+<p style="margin:10px 0 30px">Order directly or follow us on social media</p>
+
+<div style="display:flex;justify-content:center;gap:30px;flex-wrap:wrap">
+
+<a href="https://wa.me/918607794578" target="_blank"
+style="background:#25D366;padding:20px 40px;border-radius:10px;color:white;text-decoration:none;font-size:20px">
+📲 Chat on WhatsApp
+</a>
+
+<a href="https://instagram.com/yourusername" target="_blank"
+style="background:#E1306C;padding:20px 40px;border-radius:10px;color:white;text-decoration:none;font-size:20px">
+📸 Instagram
+</a>
+
+<a href="https://facebook.com/yourpage" target="_blank"
+style="background:#1877F2;padding:20px 40px;border-radius:10px;color:white;text-decoration:none;font-size:20px">
+👍 Facebook
+</a>
+
 </div>
-</div>
+</section>
+<footer>
+<p>© 2026 FitFuel Supplements</p>
+<p>
+<a href="https://wa.me/918607794578" style="color:#00ff88">WhatsApp</a> |
+<a href="https://instagram.com/yourusername" style="color:#00ff88">Instagram</a> |
+<a href="https://facebook.com/yourpage" style="color:#00ff88">Facebook</a>
+</p>
+</footer>
 
 <script>
-let selectedAmount=0;
-const upiId="8607794578@ybl";
-const payeeName="LoanService";
 
-// FORM SUBMIT -> SHOW PLANS
-document.getElementById("loanForm").onsubmit=(e)=>{
- e.preventDefault();
- document.getElementById("planSection").style.display="block";
- window.scrollTo(0,document.body.scrollHeight);
+    window.onclick = function(event){
+let modal = document.getElementById("modal");
+if(event.target === modal){
+modal.style.display = "none";
+}
 }
 
-function selectPlan(amount,el){
- selectedAmount=amount;
- document.querySelectorAll('.plan').forEach(p=>p.classList.remove('active'));
- el.classList.add('active');
+
+
+const products=[
+{name:"Whey Protein",price:2000,img:"https://images.unsplash.com/photo-1594737625785-cbdb1b70f18d"},
+{name:"Mass Gainer",price:2500,img:"https://images.unsplash.com/photo-1605296867424-35fc25c9212a"},
+{name:"Creatine",price:1200,img:"https://images.unsplash.com/photo-1583454110551-21f2fa2afe61"},
+{name:"Multivitamins",price:900,img:"https://images.unsplash.com/photo-1580281657527-47f249e8f4df"},
+{name:"Pre Workout",price:1500,img:"https://images.unsplash.com/photo-1600185365483-26d7a4cc7519"},
+{name:"BCAA",price:1400,img:"https://images.unsplash.com/photo-1599058917212-d750089bc07e"},
+{name:"Fish Oil",price:800,img:"https://images.unsplash.com/photo-1584362917165-526a968579e8"},
+{name:"Peanut Butter",price:500,img:"https://images.unsplash.com/photo-1585238342024-78d387f4a707"},
+{name:"Oats",price:350,img:"https://images.unsplash.com/photo-1505575972945-28047c4c15b2"},
+{name:"Protein Bars",price:700,img:"https://images.unsplash.com/photo-1615485737651-fc3a7c7a6f52"},
+{name:"Glutamine",price:1100,img:"https://images.unsplash.com/photo-1592928302636-c83cf1a1f5f2"},
+{name:"Shaker Bottle",price:300,img:"https://images.unsplash.com/photo-1612538498456-e861df91d4d0"}
+];
+
+let cart=[];
+function displayProducts(filter=""){
+let grid=document.getElementById("productGrid");
+grid.innerHTML="";
+
+let filteredProducts = products.filter(p =>
+p.name.toLowerCase().includes(filter.toLowerCase())
+);
+
+if(filteredProducts.length===0){
+grid.innerHTML="<h2>No Product Found</h2>";
+return;
 }
 
-function showPopup(){
- if(!selectedAmount){alert("Please select a plan");return}
- document.getElementById("popup").style.display="flex";
-}
-function closePopup(){document.getElementById("popup").style.display="none"}
+filteredProducts.forEach((p,i)=>{
+let index = products.findIndex(prod => prod.name === p.name);
 
-function pay(app){
- const note="Loan Processing Fee";
- const base=`upi://pay?pa=${upiId}&pn=${payeeName}&am=${selectedAmount}&cu=INR&tn=${note}`;
- if(app==='gpay') window.location.href=`tez://upi/pay?pa=${upiId}&pn=${payeeName}&am=${selectedAmount}&cu=INR&tn=${note}`;
- else if(app==='phonepe') window.location.href=`phonepe://pay?pa=${upiId}&pn=${payeeName}&am=${selectedAmount}&cu=INR&tn=${note}`;
- else window.location.href=base;
+grid.innerHTML+=`
+<div class="card">
+<img src="${p.img}" onclick="openModal(${index})">
+<h3>${p.name}</h3>
+<p>₹${p.price}</p>
+<button onclick="addToCart(${index})">Add to Cart</button>
+</div>`;
+});
+}
+displayProducts();
+function openModal(index){
+let product = products[index];
 
- setTimeout(()=>{
-   document.getElementById("popup").style.display="none";
-   document.getElementById("successMsg").style.display="block";
-   sendWhatsApp();
- },4000);
+document.getElementById("modal").style.display="flex";
+document.getElementById("modalImg").src = product.img;
+document.getElementById("modalName").innerText = product.name;
+document.getElementById("modalPrice").innerText = "Price: ₹" + product.price;
+}
+function closeModal(){document.getElementById("modal").style.display="none"}
+
+function addToCart(i){
+let item=cart.find(p=>p.name===products[i].name);
+if(item) item.qty++;
+else cart.push({...products[i],qty:1});
+updateCart();
 }
 
-function sendWhatsApp(){
- const name=document.getElementById('name').value;
- const phone=document.getElementById('phone').value;
- const email=document.getElementById('email').value;
- const loan=document.getElementById('amount').value;
- const type=document.getElementById('type').value;
- const msg=`Loan Application:%0AName:${name}%0APhone:${phone}%0AEmail:${email}%0ALoan:${loan}%0AType:${type}%0APlan Paid:₹${selectedAmount}`;
- window.open(`https://wa.me/91?text=${msg}`,'_blank');
+function updateCart(){
+let list=document.getElementById("cartItems");
+let total=0; list.innerHTML="";
+cart.forEach((p,index)=>{
+total+=p.price*p.qty;
+list.innerHTML+=`<div class="cart-item">
+${p.name} x${p.qty} - ₹${p.price*p.qty}
+<button onclick="removeItem(${index})">Remove</button>
+</div>`;
+});
+document.getElementById("total").innerText="Total: ₹"+total;
+document.getElementById("count").innerText=cart.length;
 }
+
+function removeItem(i){cart.splice(i,1);updateCart();}
+
+function orderWhatsApp(){
+if(cart.length===0){alert("Cart is empty");return;}
+let msg="Hello, I want to order:%0A%0A";
+let total=0;
+cart.forEach(p=>{
+msg+=`${p.name} x${p.qty} - ₹${p.price*p.qty}%0A`;
+total+=p.price*p.qty;
+});
+msg+=`%0ATotal Amount: ₹${total}`;
+window.open(`https://wa.me/918607794578?text=${msg}`,"_blank");
+}
+
+    // 🔍 SEARCH FUNCTION (FIX)
+document.getElementById("searchBar").addEventListener("keyup", function(){
+displayProducts(this.value);
+});
 </script>
+
 </body>
 </html>
