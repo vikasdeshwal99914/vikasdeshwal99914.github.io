@@ -3,243 +3,312 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FitFuel Supplements</title>
+<title>Weight Loss Plan</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#0f0f0f;color:#fff;scroll-behavior:smooth}
+body{background:#f4f4f4;color:#222;scroll-behavior:smooth}
+section{padding:60px 20px}
+h1,h2{text-align:center;margin-bottom:20px}
+.container{max-width:1100px;margin:auto}
 
-/* NAVBAR */
-header{
-position:sticky;top:0;background:#000;padding:15px 40px;
-display:flex;justify-content:space-between;align-items:center;z-index:999
-}
-nav a{color:#fff;margin:0 15px;text-decoration:none;font-weight:bold}
-nav a:hover{color:#00ff88}
-.cart-count{background:#00ff88;color:#000;padding:3px 8px;border-radius:50%}
-
-/* HERO */
 .hero{
-height:80vh;display:flex;justify-content:center;align-items:center;
-text-align:center;background:url('https://images.unsplash.com/photo-1599058917765-a780eda07a3e') center/cover
+background:url("https://images.unsplash.com/photo-1546483875-ad9014c88eba") center/cover;
+color:white;text-align:center;padding:120px 20px
 }
-.hero h1{font-size:55px;background:rgba(0,0,0,.7);padding:20px;border-radius:10px}
+.hero h1{font-size:45px;text-shadow:2px 2px 6px #000}
+.btn{background:black;color:white;padding:15px 25px;border:none;margin-top:20px;cursor:pointer;font-size:18px;border-radius:6px}
+.btn:hover{background:#333}
 
-/* PRODUCTS */
-.products{padding:50px 20px;text-align:center}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;margin-top:30px}
-.card{
-background:#1a1a1a;padding:15px;border-radius:10px;transition:.3s
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.gallery img{width:100%;height:250px;object-fit:cover;border-radius:12px}
+
+.quotes{background:#0c8f4f;color:white;text-align:center;padding:40px;border-radius:10px}
+.quote{margin:15px;font-size:22px;font-weight:bold}
+
+table{width:100%;border-collapse:collapse;margin:20px 0}
+th,td{border:1px solid #ddd;padding:10px;text-align:center}
+th{background:#0c8f4f;color:white}
+
+.steps{display:flex;gap:20px;flex-wrap:wrap;justify-content:center}
+.step{background:white;padding:20px;border-radius:10px;width:300px;text-align:center}
+
+.testimonials{display:flex;gap:20px;flex-wrap:wrap;justify-content:center}
+.testimonial{background:white;padding:20px;border-radius:10px;width:300px}
+
+.pricing{background:#0c8f4f;color:white;text-align:center;border-radius:10px;padding:30px}
+.price{font-size:40px;margin:10px 0}
+
+form{background:white;padding:30px;border-radius:10px}
+input,select,textarea{width:100%;padding:10px;margin:10px 0;border:1px solid #ccc;border-radius:5px}
+
+footer{background:black;color:white;text-align:center;padding:20px;margin-top:40px}
+
+
+    <!-- FLOATING CONTACT BUTTONS -->
+<a href="https://wa.me/919876543210" target="_blank" class="float-whatsapp">💬</a>
+<a href="tel:+919876543210" class="float-call">📞</a>
+
+
+.float-whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:white;
+font-size:26px;
+padding:15px 18px;
+border-radius:50%;
+text-decoration:none;
+box-shadow:0 4px 10px rgba(0,0,0,0.3);
 }
-.card:hover{transform:scale(1.05)}
-.card img{width:100%;height:220px;object-fit:cover;border-radius:10px;cursor:pointer}
-button{
-margin-top:10px;padding:10px;width:100%;border:none;
-background:#00ff88;font-weight:bold;cursor:pointer;border-radius:5px
+
+.float-call{
+position:fixed;
+bottom:90px;
+right:20px;
+background:#0c8f4f;
+color:white;
+font-size:26px;
+padding:15px 18px;
+border-radius:50%;
+text-decoration:none;
+box-shadow:0 4px 10px rgba(0,0,0,0.3);
 }
-button:hover{background:#00cc6a}
 
-/* CART */
-.cart{padding:40px;background:#111}
-.cart-item{display:flex;justify-content:space-between;margin:10px 0}
-.whatsapp-btn{
-background:#25D366;color:#fff;font-size:20px;margin-top:20px
-}
-
-/* MODAL */
-.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;
-background:rgba(0,0,0,.8);justify-content:center;align-items:center}
-.modal img{width:350px;border-radius:10px}
-.close{position:absolute;top:20px;right:30px;font-size:30px;cursor:pointer}
-
-/* FOOTER */
-footer{text-align:center;padding:20px;background:#000;margin-top:40px}
-
-    #searchBar{
-margin-right:20px;
-width:220px;
-outline:none;
-}
 </style>
 </head>
 
 <body>
-
-<header>
-<h2>FitFuel 💪</h2>
-<nav>
-<input type="text" id="searchBar" placeholder="Search supplements..."
-style="padding:6px;border-radius:5px;border:none">
-
-<a href="#">Home</a>
-<a href="#products">Products</a>
-    <a href="#contact">Contact</a>
-<a href="#cart">Cart <span class="cart-count" id="count">0</span></a>
-</nav>
-</header>
+<!-- CONTACT BAR -->
+<div style="background:#0c8f4f;color:white;padding:8px;text-align:center;font-size:18px;">
+📞 Call: <a href="tel:+919876543210" style="color:white;font-weight:bold;">+91 9876543210</a>
+&nbsp;&nbsp; | &nbsp;&nbsp;
+💬 WhatsApp: <a href="https://wa.me/919876543210" target="_blank" style="color:white;font-weight:bold;">Chat Now</a>
+</div>
 
 <section class="hero">
-<h1>Build Your Dream Body 💪</h1>
+<h1>Transform Your Body & Mind</h1>
+<p>Personal diet guidance + calorie knowledge + WhatsApp support</p>
+<a href="#form"><button class="btn">Start Your Journey</button></a>
 </section>
 
-<section id="products" class="products">
-<h2>Supplements at WholesSale Rate</h2>
-<div class="grid" id="productGrid"></div>
-</section>
-
-<section id="cart" class="cart">
-<h2>Your Cart</h2>
-<div id="cartItems"></div>
-<h3 id="total">Total: ₹0</h3>
-<button class="whatsapp-btn" onclick="orderWhatsApp()">Order on WhatsApp</button>
-</section>
-<div class="modal" id="modal">
-  <div style="background:#111;padding:20px;border-radius:10px;position:relative;text-align:center">
-
-    <span class="close" onclick="closeModal()"
-    style="position:absolute;top:10px;right:15px;font-size:25px;cursor:pointer">X</span>
-
-    <img id="modalImg" style="width:300px;border-radius:10px">
-    <h2 id="modalName" style="margin-top:15px"></h2>
-    <p id="modalPrice" style="color:#00ff88;font-size:20px"></p>
-
-  </div>
-</div>>
-
-
-<section id="contact" style="padding:60px 20px;text-align:center;background:#111">
-<h2>Contact Us</h2>
-<p style="margin:10px 0 30px">Order directly or follow us on social media</p>
-
-<div style="display:flex;justify-content:center;gap:30px;flex-wrap:wrap">
-
-<a href="https://wa.me/918607794578" target="_blank"
-style="background:#25D366;padding:20px 40px;border-radius:10px;color:white;text-decoration:none;font-size:20px">
-📲 Chat on WhatsApp
-</a>
-
-<a href="https://instagram.com/yourusername" target="_blank"
-style="background:#E1306C;padding:20px 40px;border-radius:10px;color:white;text-decoration:none;font-size:20px">
-📸 Instagram
-</a>
-
-<a href="https://facebook.com/yourpage" target="_blank"
-style="background:#1877F2;padding:20px 40px;border-radius:10px;color:white;text-decoration:none;font-size:20px">
-👍 Facebook
-</a>
-
+<section class="container">
+<h2>Fitness Motivation</h2>
+<div class="quotes">
+<div class="quote">“Your body can stand almost anything. It’s your mind you must convince.”</div>
+<div class="quote">“Do something today that your future self will thank you for.”</div>
+<div class="quote">“Small steps every day lead to big results.”</div>
 </div>
 </section>
+
+<section class="container">
+<h2>Start Your Fitness Journey</h2>
+<div class="gallery">
+<img src="https://images.unsplash.com/photo-1517960413843-0aee8e2b3285">
+<img src="https://images.unsplash.com/photo-1594737625785-c6902d9e3e6d">
+<img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438">
+<img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f">
+<img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5">
+<img src="https://images.unsplash.com/photo-1554284126-aa88f22d8b74">
+</div>
+</section>
+
+<section class="container">
+<section class="container">
+<h2>Calories Per 100g Food Database</h2>
+
+<h3>🥦 Vegetables</h3>
+<table>
+<tr><th>Food</th><th>Calories</th></tr>
+<tr><td>Potato</td><td>77</td></tr>
+<tr><td>Sweet Potato</td><td>86</td></tr>
+<tr><td>Onion</td><td>40</td></tr>
+<tr><td>Tomato</td><td>18</td></tr>
+<tr><td>Carrot</td><td>41</td></tr>
+<tr><td>Spinach</td><td>23</td></tr>
+<tr><td>Broccoli</td><td>34</td></tr>
+<tr><td>Cabbage</td><td>25</td></tr>
+<tr><td>Cauliflower</td><td>25</td></tr>
+<tr><td>Green Peas</td><td>81</td></tr>
+<tr><td>Capsicum</td><td>20</td></tr>
+<tr><td>Brinjal</td><td>25</td></tr>
+<tr><td>Beetroot</td><td>43</td></tr>
+<tr><td>Okra</td><td>33</td></tr>
+<tr><td>Cucumber</td><td>16</td></tr>
+<tr><td>Radish</td><td>16</td></tr>
+</table>
+
+<h3>🍎 Fruits</h3>
+<table>
+<tr><th>Food</th><th>Calories</th></tr>
+<tr><td>Apple</td><td>52</td></tr>
+<tr><td>Banana</td><td>89</td></tr>
+<tr><td>Mango</td><td>60</td></tr>
+<tr><td>Orange</td><td>47</td></tr>
+<tr><td>Papaya</td><td>43</td></tr>
+<tr><td>Grapes</td><td>69</td></tr>
+<tr><td>Pineapple</td><td>50</td></tr>
+<tr><td>Watermelon</td><td>30</td></tr>
+<tr><td>Guava</td><td>68</td></tr>
+<tr><td>Pomegranate</td><td>83</td></tr>
+<tr><td>Kiwi</td><td>61</td></tr>
+<tr><td>Strawberry</td><td>33</td></tr>
+<tr><td>Muskmelon</td><td>34</td></tr>
+</table>
+
+<h3>🌾 Grains & Staples</h3>
+<table>
+<tr><th>Food</th><th>Calories</th></tr>
+<tr><td>White Rice</td><td>130</td></tr>
+<tr><td>Brown Rice</td><td>112</td></tr>
+<tr><td>Wheat Flour</td><td>364</td></tr>
+<tr><td>Roti</td><td>120</td></tr>
+<tr><td>Oats</td><td>389</td></tr>
+<tr><td>Poha</td><td>130</td></tr>
+<tr><td>Suji</td><td>360</td></tr>
+<tr><td>Corn</td><td>86</td></tr>
+<tr><td>Quinoa</td><td>120</td></tr>
+<tr><td>Barley</td><td>354</td></tr>
+</table>
+
+<h3>🥗 Pulses & Legumes</h3>
+<table>
+<tr><th>Food</th><th>Calories</th></tr>
+<tr><td>Moong Dal</td><td>347</td></tr>
+<tr><td>Toor Dal</td><td>343</td></tr>
+<tr><td>Chana Dal</td><td>364</td></tr>
+<tr><td>Rajma</td><td>333</td></tr>
+<tr><td>Chickpeas</td><td>364</td></tr>
+<tr><td>Black Gram</td><td>341</td></tr>
+<tr><td>Masoor Dal</td><td>352</td></tr>
+<tr><td>Soya Chunks</td><td>345</td></tr>
+</table>
+
+<h3>🥛 Dairy</h3>
+<table>
+<tr><th>Food</th><th>Calories</th></tr>
+<tr><td>Milk</td><td>42</td></tr>
+<tr><td>Curd</td><td>59</td></tr>
+<tr><td>Paneer</td><td>265</td></tr>
+<tr><td>Butter</td><td>717</td></tr>
+<tr><td>Ghee</td><td>900</td></tr>
+<tr><td>Cheese</td><td>402</td></tr>
+</table>
+
+<h3>🥜 Nuts & Seeds</h3>
+<table>
+<tr><th>Food</th><th>Calories</th></tr>
+<tr><td>Almonds</td><td>579</td></tr>
+<tr><td>Peanuts</td><td>567</td></tr>
+<tr><td>Cashews</td><td>553</td></tr>
+<tr><td>Walnuts</td><td>654</td></tr>
+<tr><td>Flax Seeds</td><td>534</td></tr>
+<tr><td>Chia Seeds</td><td>486</td></tr>
+<tr><td>Pumpkin Seeds</td><td>559</td></tr>
+</table>
+
+<h3>🍛 Popular Indian Foods</h3>
+<table>
+<tr><th>Food</th><th>Calories</th></tr>
+<tr><td>Dal Tadka</td><td>180</td></tr>
+<tr><td>Vegetable Sabzi</td><td>120</td></tr>
+<tr><td>Paneer Sabzi</td><td>265</td></tr>
+<tr><td>Khichdi</td><td>150</td></tr>
+<tr><td>Upma</td><td>180</td></tr>
+<tr><td>Idli</td><td>58</td></tr>
+<tr><td>Dosa</td><td>168</td></tr>
+<tr><td>Poha</td><td>130</td></tr>
+</table>
+
+</section></section>
+
+<section class="container">
+<h2>Success Stories</h2>
+<div class="testimonials">
+<div class="testimonial">Lost 8kg in 2 months 🔥</div>
+<div class="testimonial">Energy levels doubled ⚡</div>
+<div class="testimonial">Finally confident again 💪</div>
+</div>
+</section>
+
+<section class="container">
+<div class="pricing">
+<h2>Weight Loss Plan</h2>
+<p class="price">₹2000</p>
+<p>✔ Personal calorie target<br>✔ Fat loss guidance<br>✔ WhatsApp Support</p>
+<a href="#form"><button class="btn">Subscribe Now</button></a>
+</div>
+</section>
+
+<section id="form" class="container">
+<h2>Health Form</h2>
+<form id="healthForm">
+<input type="text" id="name" placeholder="Full Name" required>
+<input type="number" id="age" placeholder="Age" required>
+<input type="number" id="height" placeholder="Height (cm)" required>
+<input type="number" id="weight" placeholder="Weight (kg)" required>
+<input type="number" id="target" placeholder="Target Weight" required>
+<textarea id="disease" placeholder="Medical Conditions"></textarea>
+<input type="tel" id="phone" placeholder="WhatsApp Number" required>
+
+    <a href="paymentmethod.html" target="_blank"
+style="display:block;margin-top:15px;font-size:22px;font-weight:bold;text-decoration:underline;color:#00ff88;">
+💰 PAY NOW ₹2000
+</a>
+
+
+<button type="submit" class="btn">Submit & Contact on WhatsApp</button>
+</form>
+</section>
+
+<!-- FLOATING CONTACT BUTTONS -->
+<a href="https://wa.me/919876543210" target="_blank" class="float-whatsapp">💬</a>
+<a href="tel:+919876543210" class="float-call">📞</a>
 <footer>
-<p>© 2026 FitFuel Supplements</p>
-<p>
-<a href="https://wa.me/918607794578" style="color:#00ff88">WhatsApp</a> |
-<a href="https://instagram.com/yourusername" style="color:#00ff88">Instagram</a> |
-<a href="https://facebook.com/yourpage" style="color:#00ff88">Facebook</a>
-</p>
-</footer>
+<h3>Ready to Transform?</h3>
+<a href="paymentmethod.html" target="_blank"
+style="display:block;margin-top:15px;font-size:22px;font-weight:bold;text-decoration:underline;color:#00ff88;">
+💰 PAY NOW ₹2000
+</a>
+
+<p style="margin-top:15px;">Contact us on WhatsApp | Instagram</p>
+<p>© Weight Loss Fitness</p>
+</footer>>
+
+
 
 <script>
+document.getElementById("healthForm").addEventListener("submit", function(e){
+e.preventDefault();
 
-    window.onclick = function(event){
-let modal = document.getElementById("modal");
-if(event.target === modal){
-modal.style.display = "none";
-}
-}
+// Get all form values
+let name=document.getElementById("name").value;
+let age=document.getElementById("age").value;
+let height=document.getElementById("height").value;
+let weight=document.getElementById("weight").value;
+let target=document.getElementById("target").value;
+let disease=document.getElementById("disease").value;
+let phone=document.getElementById("phone").value;
 
+// Format WhatsApp message
+let message = "🔥 NEW WEIGHT LOSS CLIENT 🔥%0A%0A" +
+"👤 Name: " + name + "%0A" +
+"🎂 Age: " + age + "%0A" +
+"📏 Height: " + height + " cm%0A" +
+"⚖ Current Weight: " + weight + " kg%0A" +
+"🎯 Target Weight: " + target + " kg%0A" +
+"🩺 Medical Conditions: " + disease + "%0A" +
+"📱 Client WhatsApp: " + phone + "%0A%0A" +
+"💰 Interested in ₹2000 Weight Loss Plan";
 
+// 👉 CHANGE THIS NUMBER TO YOUR NUMBER
+let yourNumber = "918607794578";
 
-const products=[
-{name:"Whey Protein",price:2000,img:"https://images.unsplash.com/photo-1594737625785-cbdb1b70f18d"},
-{name:"Mass Gainer",price:2500,img:"https://images.unsplash.com/photo-1605296867424-35fc25c9212a"},
-{name:"Creatine",price:1200,img:"https://images.unsplash.com/photo-1583454110551-21f2fa2afe61"},
-{name:"Multivitamins",price:900,img:"https://images.unsplash.com/photo-1580281657527-47f249e8f4df"},
-{name:"Pre Workout",price:1500,img:"https://images.unsplash.com/photo-1600185365483-26d7a4cc7519"},
-{name:"BCAA",price:1400,img:"https://images.unsplash.com/photo-1599058917212-d750089bc07e"},
-{name:"Fish Oil",price:800,img:"https://images.unsplash.com/photo-1584362917165-526a968579e8"},
-{name:"Peanut Butter",price:500,img:"https://images.unsplash.com/photo-1585238342024-78d387f4a707"},
-{name:"Oats",price:350,img:"https://images.unsplash.com/photo-1505575972945-28047c4c15b2"},
-{name:"Protein Bars",price:700,img:"https://images.unsplash.com/photo-1615485737651-fc3a7c7a6f52"},
-{name:"Glutamine",price:1100,img:"https://images.unsplash.com/photo-1592928302636-c83cf1a1f5f2"},
-{name:"Shaker Bottle",price:300,img:"https://images.unsplash.com/photo-1612538498456-e861df91d4d0"}
-];
+// Open WhatsApp with pre-filled message
+let url = "https://wa.me/" + yourNumber + "?text=" + message;
 
-let cart=[];
-function displayProducts(filter=""){
-let grid=document.getElementById("productGrid");
-grid.innerHTML="";
-
-let filteredProducts = products.filter(p =>
-p.name.toLowerCase().includes(filter.toLowerCase())
-);
-
-if(filteredProducts.length===0){
-grid.innerHTML="<h2>No Product Found</h2>";
-return;
-}
-
-filteredProducts.forEach((p,i)=>{
-let index = products.findIndex(prod => prod.name === p.name);
-
-grid.innerHTML+=`
-<div class="card">
-<img src="${p.img}" onclick="openModal(${index})">
-<h3>${p.name}</h3>
-<p>₹${p.price}</p>
-<button onclick="addToCart(${index})">Add to Cart</button>
-</div>`;
-});
-}
-displayProducts();
-function openModal(index){
-let product = products[index];
-
-document.getElementById("modal").style.display="flex";
-document.getElementById("modalImg").src = product.img;
-document.getElementById("modalName").innerText = product.name;
-document.getElementById("modalPrice").innerText = "Price: ₹" + product.price;
-}
-function closeModal(){document.getElementById("modal").style.display="none"}
-
-function addToCart(i){
-let item=cart.find(p=>p.name===products[i].name);
-if(item) item.qty++;
-else cart.push({...products[i],qty:1});
-updateCart();
-}
-
-function updateCart(){
-let list=document.getElementById("cartItems");
-let total=0; list.innerHTML="";
-cart.forEach((p,index)=>{
-total+=p.price*p.qty;
-list.innerHTML+=`<div class="cart-item">
-${p.name} x${p.qty} - ₹${p.price*p.qty}
-<button onclick="removeItem(${index})">Remove</button>
-</div>`;
-});
-document.getElementById("total").innerText="Total: ₹"+total;
-document.getElementById("count").innerText=cart.length;
-}
-
-function removeItem(i){cart.splice(i,1);updateCart();}
-
-function orderWhatsApp(){
-if(cart.length===0){alert("Cart is empty");return;}
-let msg="Hello, I want to order:%0A%0A";
-let total=0;
-cart.forEach(p=>{
-msg+=`${p.name} x${p.qty} - ₹${p.price*p.qty}%0A`;
-total+=p.price*p.qty;
-});
-msg+=`%0ATotal Amount: ₹${total}`;
-window.open(`https://wa.me/918607794578?text=${msg}`,"_blank");
-}
-
-    // 🔍 SEARCH FUNCTION (FIX)
-document.getElementById("searchBar").addEventListener("keyup", function(){
-displayProducts(this.value);
+window.open(url, "_blank");
 });
 </script>
 
