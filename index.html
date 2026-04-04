@@ -79,7 +79,7 @@ footer{background:#1faa59;color:white;text-align:center;padding:20px}
 <li><a href="#products">Products</a></li>
 <li><a href="#checkout">Checkout</a></li>
     <li><a href="#contact">Contact</a></li>
-<li><a href="#" onclick="toggleCart()">Cart <span id="count" class="cart-count">0</span></a></li>
+<li><a href="#" onclick="openCartPage()">Cart <span id="count" class="cart-count">0</span></a></li>
 </ul>
 </nav>
 
@@ -318,6 +318,11 @@ function outsideCartClick(event){
   if(event.target.id === "cartOverlay"){
     closeCart()
   }
+}
+
+    function openCartPage(){
+  localStorage.setItem("cartData", JSON.stringify(cart))
+  window.open("cart.html", "_blank")
 }
 </script>
 
