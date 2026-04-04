@@ -62,10 +62,27 @@ return txt
 function sendWhatsApp(){
 window.open("https://wa.me/918607794578?text="+getText())
 }
-
 function payUPI(){
-let upi="upi://pay?pa=8607794578@ybl=DailyBasket&am="+total+"&cu=INR"
-window.location.href=upi
+
+if(total == 0){
+  alert("Cart is empty!");
+  return;
+}
+
+let upiID = "yourupi@upi";   // 👉 CHANGE THIS
+let name = "DailyBasket Grocery";
+
+// Proper UPI deep link
+let upiLink = `upi://pay?pa=${upiID}&pn=${encodeURIComponent(name)}&am=${total}&cu=INR&tn=${encodeURIComponent("Grocery Order Payment")}`;
+
+// Try to open UPI apps
+window.location.href = upiLink;
+
+// Backup message if desktop
+setTimeout(function(){
+  alert("If payment app did not open, please open this page on mobile and click Pay Now again.");
+},2000);
+
 }
 </script>
 
