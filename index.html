@@ -96,13 +96,23 @@ footer{background:#1faa59;color:white;text-align:center;padding:20px}
 </section>
 
 <!-- CART -->
-<div class="cart" id="cartBox">
-<h2>Your Cart</h2>
+<!-- CART OVERLAY -->
+<div id="cartOverlay" onclick="outsideCartClick(event)"
+style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+background:rgba(0,0,0,0.6);z-index:998">
+
+  <div class="cart" id="cartBox" style="display:block">
+
+    <span onclick="closeCart()"
+    style="position:absolute;right:15px;top:10px;font-size:22px;cursor:pointer">✖</span>
+
+    <h2>Your Cart</h2>
 <div id="cartItems"></div>
 <h3>Total ₹<span id="total">0</span></h3>
 <button class="btn" onclick="scrollCheckout()">Checkout</button>
 </div>
-
+  </div>
+</div>
 <!-- CHECKOUT -->
 <section id="checkout" class="form">
 
@@ -238,10 +248,8 @@ function removeItem(index){
 cart.splice(index,1)
 updateCart()
 }
-
 function toggleCart(){
-let c=document.getElementById("cartBox")
-c.style.display=c.style.display=="block"?"none":"block"
+  document.getElementById("cartOverlay").style.display="block"
 }
 
 function scrollCheckout(){
@@ -299,6 +307,16 @@ document.getElementById("popup").style.display="none"
     function outsideClick(event){
   if(event.target.id === "popup"){
     closePopup()
+  }
+}
+
+    function closeCart(){
+  document.getElementById("cartOverlay").style.display="none"
+}
+
+function outsideCartClick(event){
+  if(event.target.id === "cartOverlay"){
+    closeCart()
   }
 }
 </script>
