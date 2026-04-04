@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Checkout - DailyBasket</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{font-family:Arial;background:#f5fff6;padding:20px}
+.box{max-width:500px;margin:auto;background:white;padding:20px;border-radius:10px;box-shadow:0 0 10px #ccc}
+input,textarea,select{width:100%;padding:10px;margin:8px 0;border-radius:5px;border:1px solid #ccc}
+.btn{background:#1faa59;color:white;padding:12px;border:none;border-radius:5px;width:100%;margin-top:10px;font-size:16px;cursor:pointer}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+<h2>Your Order</h2>
+<div id="items"></div>
+<h3>Total ₹<span id="total"></span></h3>
+
+<h2>Delivery Details</h2>
+<input id="name" placeholder="Full Name">
+<input id="phone" placeholder="Mobile Number">
+<textarea id="address" placeholder="Address"></textarea>
+<input id="pincode" placeholder="Pincode">
+
+<select id="payment">
+<option>Cash on Delivery</option>
+<option>UPI</option>
+</select>
+
+<button class="btn" onclick="sendWhatsApp()">Send Order on WhatsApp</button>
+<button class="btn" onclick="payUPI()">Pay via UPI</button>
+
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cartData")) || []
+let total=0
+let html=""
+
+cart.forEach(p=>{
+ html += `<p>${p.name} - &#8377;${p.price}</p>`
+  total += p.price
+})
+
+document.getElementById("items").innerHTML=html
+document.getElementById("total").innerText=total
+
+function getText(){
+let txt="*New Grocery Order*%0A%0A"
+cart.forEach(p=>txt+=p.name+" - ₹ "+p.price+"%0A")
+txt+="%0ATotal Rs "+total+"%0A%0A"
+txt+="Name: "+document.getElementById("name").value+"%0A"
+txt+="Phone: "+document.getElementById("phone").value+"%0A"
+txt+="Address: "+document.getElementById("address").value+"%0A"
+txt+="Pincode: "+document.getElementById("pincode").value
+return txt
+}
+
+function sendWhatsApp(){
+window.open("https://wa.me/918607794578?text="+getText())
+}
+
+function payUPI(){
+let upi="upi://pay?pa=8607794578@ybl=DailyBasket&am="+total+"&cu=INR"
+window.location.href=upi
+}
+</script>
+
+</body>
+</html>
