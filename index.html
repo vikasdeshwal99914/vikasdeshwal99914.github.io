@@ -75,11 +75,10 @@ footer{background:#1faa59;color:white;text-align:center;padding:20px}
 
 <!-- NAVBAR -->
 <nav>
-<h2>DailyBasket</h2>
 <ul>
-<li><a href="#">Home</a></li>
 <li><a href="#products">Products</a></li>
 <li><a href="#checkout">Checkout</a></li>
+    <li><a href="#contact">Contact</a></li>
 <li><a href="#" onclick="toggleCart()">Cart <span id="count" class="cart-count">0</span></a></li>
 </ul>
 </nav>
@@ -125,34 +124,80 @@ footer{background:#1faa59;color:white;text-align:center;padding:20px}
 <button class="btn" onclick="payUPI()">Pay Now (UPI)</button>
 </section>
 
+<!-- CONTACT SECTION -->
+<section id="contact" style="padding:40px;text-align:center;background:#ffffff">
+<h2>Contact Us</h2>
+<p>We are always ready to help you 😊</p>
+
+<div style="margin-top:25px">
+
+<a href="https://wa.me/918607794578" target="_blank">
+<button style="background:#25D366;color:white;padding:12px 25px;border:none;border-radius:6px;margin:10px;cursor:pointer;font-size:16px">
+📱 WhatsApp Us
+</button>
+</a>
+
+<a href="https://instagram.com/YOUR_INSTAGRAM" target="_blank">
+<button style="background:#E1306C;color:white;padding:12px 25px;border:none;border-radius:6px;margin:10px;cursor:pointer;font-size:16px">
+📸 Instagram
+</button>
+</a>
+
+<a href="https://facebook.com/YOUR_FACEBOOK" target="_blank">
+<button style="background:#1877F2;color:white;padding:12px 25px;border:none;border-radius:6px;margin:10px;cursor:pointer;font-size:16px">
+👍 Facebook
+</button>
+</a>
+
+</div>
+</section>
 <footer>
 © DailyBasket Grocery Delivery
 </footer>
 
-<script>
+<!-- PRODUCT POPUP -->
+
+<div id="popup" onclick="outsideClick(event)"
+style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+background:rgba(0,0,0,0.7);justify-content:center;align-items:center;z-index:999">
+
+  <div id="popupBox"
+  style="background:white;width:90%;max-width:500px;border-radius:10px;padding:20px;position:relative">
+
+    <span onclick="closePopup()"
+    style="position:absolute;right:15px;top:10px;font-size:22px;cursor:pointer">✖</span>
+
+    <img id="popImg" style="width:100%;height:220px;object-fit:cover;border-radius:10px">
+
+    <h2 id="popName"></h2>
+    <h3 id="popPrice"></h3>
+    <p id="popDesc"></p>
+
+    <button class="btn" id="popBtn">Add to Cart</button>
+
+  </div>
+</div><script>
 let products=[
-{name:"Atta 5kg",price:260,img:"https://images.unsplash.com/photo-1608198093002-ad4e005484ec"},
-{name:"Rice 5kg",price:520,img:"https://images.unsplash.com/photo-1586201375761-83865001e31c"},
-{name:"Sugar 1kg",price:45,img:"https://images.unsplash.com/photo-1587731556938-38755b4803a6"},
-{name:"Salt 1kg",price:20,img:"https://images.unsplash.com/photo-1604908176997-125f25cc6f3d"},
-{name:"Mustard Oil",price:170,img:"https://images.unsplash.com/photo-1615485290382-441e4d049cb5"},
-{name:"Desi Ghee",price:650,img:"https://images.unsplash.com/photo-1604908811893-0a8e33e32e1e"},
-{name:"Toor Dal",price:140,img:"https://images.unsplash.com/photo-1615485737651-5a7a9a4a26ac"},
-{name:"Besan",price:90,img:"https://images.unsplash.com/photo-1615485500704-8e9909b3c735"},
-{name:"Broom",price:80,img:"https://images.unsplash.com/photo-1581578731548-c64695cc6952"},
-{name:"Pocha Mop",price:120,img:"https://images.unsplash.com/photo-1595433562696-84c3b1f5b5a5"},
-{name:"Dishwash Liquid",price:110,img:"https://images.unsplash.com/photo-1581579185169-25c62a36e57b"},
-{name:"Surf 1kg",price:130,img:"https://images.unsplash.com/photo-1626808642875-0aa545482dfb"}
+{name:"Atta 5kg",price:260,img:"https://images.unsplash.com/photo-1608198093002-ad4e005484ec",desc:"Fresh chakki atta perfect for soft rotis."},
+{name:"Rice 5kg",price:520,img:"https://images.unsplash.com/photo-1586201375761-83865001e31c",desc:"Premium basmati rice long grain."},
+{name:"Sugar 1kg",price:45,img:"https://images.unsplash.com/photo-1587731556938-38755b4803a6",desc:"Refined sulphur free sugar."},
+{name:"Salt 1kg",price:20,img:"https://images.unsplash.com/photo-1604908176997-125f25cc6f3d",desc:"Iodized healthy salt."},
+{name:"Mustard Oil",price:170,img:"https://images.unsplash.com/photo-1615485290382-441e4d049cb5",desc:"Pure cold pressed mustard oil."},
+{name:"Desi Ghee",price:650,img:"https://images.unsplash.com/photo-1604908811893-0a8e33e32e1e",desc:"Rich aroma cow ghee."},
+{name:"Toor Dal",price:140,img:"https://images.unsplash.com/photo-1615485737651-5a7a9a4a26ac",desc:"Protein rich arhar dal."},
+{name:"Besan",price:90,img:"https://images.unsplash.com/photo-1615485500704-8e9909b3c735",desc:"Fine gram flour for snacks."},
+{name:"Broom",price:80,img:"https://images.unsplash.com/photo-1581578731548-c64695cc6952",desc:"Strong long lasting broom."},
+{name:"Pocha Mop",price:120,img:"https://images.unsplash.com/photo-1595433562696-84c3b1f5b5a5",desc:"Super absorbent floor mop."},
+{name:"Dishwash Liquid",price:110,img:"https://images.unsplash.com/photo-1581579185169-25c62a36e57b",desc:"Removes grease instantly."},
+{name:"Surf 1kg",price:130,img:"https://images.unsplash.com/photo-1626808642875-0aa545482dfb",desc:"Powerful detergent powder."}
 ]
-
 let cart=[]
-
 function loadProducts(){
 let grid=document.getElementById("productGrid")
 products.forEach((p,i)=>{
 grid.innerHTML+=`
 <div class="card">
-<img src="${p.img}">
+<img src="${p.img}" onclick="openPopup(${i})" style="cursor:pointer">
 <h3>${p.name}</h3>
 <p>₹${p.price}</p>
 <button onclick="addCart(${i})">Add to Cart</button>
@@ -237,6 +282,24 @@ let upiLink = `upi://pay?pa=${upiID}&pn=${encodeURIComponent(name)}&am=${amount}
 // Open payment apps
 window.location.href = upiLink
 
+}
+
+    function openPopup(i){
+document.getElementById("popup").style.display="flex"
+document.getElementById("popImg").src=products[i].img
+document.getElementById("popName").innerText=products[i].name
+document.getElementById("popPrice").innerText="Price ₹"+products[i].price
+document.getElementById("popDesc").innerText=products[i].desc
+document.getElementById("popBtn").onclick=function(){addCart(i)}
+}
+
+function closePopup(){
+document.getElementById("popup").style.display="none"
+}
+    function outsideClick(event){
+  if(event.target.id === "popup"){
+    closePopup()
+  }
 }
 </script>
 
