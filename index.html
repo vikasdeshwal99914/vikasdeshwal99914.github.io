@@ -201,7 +201,7 @@ let products=[
 {name:"Dishwash Liquid",price:110,img:"https://images.unsplash.com/photo-1581579185169-25c62a36e57b",desc:"Removes grease instantly."},
 {name:"Surf 1kg",price:130,img:"https://images.unsplash.com/photo-1626808642875-0aa545482dfb",desc:"Powerful detergent powder."}
 ]
-let cart=[]
+let cart={}
 function loadProducts(){
 let grid=document.getElementById("productGrid")
 products.forEach((p,i)=>{
@@ -217,59 +217,99 @@ grid.innerHTML+=`
 loadProducts()
 
 function addCart(i){
-cart.push(products[i])
+let product = products[i]
+
+if(cart[i]){
+  cart[i].qty += 1
+}else{
+  cart[i] = {...product, qty:1}
+}
+
 updateCart()
 }
+
 function updateCart(){
-document.getElementById("count").innerText=cart.length
 
 let items=""
 let checkoutItems=""
 let total=0
+let count=0
 
-cart.forEach((p,index)=>{
-  items+=`<p>${p.name} - ₹${p.price}</p>`
+for(let i in cart){
+let p = cart[i]
 
-  checkoutItems+=`
-  <div style="display:flex;justify-content:space-between;margin:8px 0">
-    <span>${p.name} - ₹${p.price}</span>
-    <button onclick="removeItem(${index})" style="background:red;color:white;border:none;padding:3px 8px;border-radius:4px;cursor:pointer">X</button>
-  </div>`
+count += p.qty
+total += p.price * p.qty
 
-  total+=p.price
-})
+items += `<p>${p.name} - ${p.qty} x ₹${p.price}</p>`
 
+checkoutItems += `
+<div style="display:flex;justify-content:space-between;align-items:center;margin:10px 0;background:#f5fff6;padding:8px;border-radius:6px">
+  <span>${p.name}</span>
+
+  <div>
+    <button onclick="changeQty(${i},-1)">−</button>
+    <b style="margin:0 10px">${p.qty}</b>
+    <button onclick="changeQty(${i},1)">+</button>
+  </div>
+
+  <span>₹${p.price * p.qty}</span>
+</div>`
+}
+
+document.getElementById("count").innerText=count
 document.getElementById("cartItems").innerHTML=items
 document.getElementById("checkoutItems").innerHTML=checkoutItems
 document.getElementById("total").innerText=total
 }
 
-function removeItem(index){
-cart.splice(index,1)
+function changeQty(index,change){
+
+cart[index].qty += change
+
+if(cart[index].qty <= 0){
+  delete cart[index]
+}
+
 updateCart()
 }
 function toggleCart(){
   document.getElementById("cartOverlay").style.display="block"
 }
-
 function scrollCheckout(){
-document.getElementById("checkout").scrollIntoView()
+  closeCart()
+  document.getElementById("checkout").scrollIntoView({behavior:"smooth"})
 }
-
-function getOrderText(){
-let txt="*New Grocery Order*%0A"
-cart.forEach(p=>txt+=p.name+" - ₹"+p.price+"%0A")
-txt+="Total: ₹"+document.getElementById("total").innerText+"%0A"
-txt+="Name: "+document.getElementById("name").value+"%0A"
-txt+="Phone: "+document.getElementById("phone").value+"%0A"
-txt+="Address: "+document.getElementById("address").value+"%0A"
-txt+="Pincode: "+document.getElementById("pincode").value
-return txt
-}
-
 function sendWhatsApp(){
-let url="https://wa.me/918607794578?text="+getOrderText()
-window.open(url)
+
+if(Object.keys(cart).length === 0){
+  alert("Cart is empty!")
+  return
+}
+
+let name = document.getElementById("name").value
+let phone = document.getElementById("phone").value
+let address = document.getElementById("address").value
+let pincode = document.getElementById("pincode").value
+
+if(name=="" || phone=="" || address=="" || pincode==""){
+  alert("Please fill all details")
+  return
+}
+
+let text="🛒 *New Grocery Order* %0A%0A"
+let total=0
+
+for(let i in cart){
+let p = cart[i]
+text += `${p.name} - ${p.qty} x ₹${p.price} = ₹${p.qty*p.price}%0A`
+total += p.qty*p.price
+}
+
+text += `%0A💰 Total: ₹${total}%0A%0A`
+text += `👤 Name: ${name}%0A📞 Phone: ${phone}%0A🏠 Address: ${address}%0A📍 Pincode: ${pincode}`
+
+window.open("https://wa.me/918607794578?text="+text)
 }
 
 function payUPI(){
@@ -320,10 +360,16 @@ function outsideCartClick(event){
   }
 }
 
-    function openCartPage(){
-  localStorage.setItem("cartData", JSON.stringify(cart))
-  window.open("cart.html", "_blank")
+  function openCartPage(){
+  // open cart popup first
+  document.getElementById("cartOverlay").style.display="block"
+
+  // small delay then scroll to checkout
+  setTimeout(()=>{
+    document.getElementById("checkout").scrollIntoView({behavior:"smooth"})
+  },300)
 }
+
 </script>
 
 </body>
