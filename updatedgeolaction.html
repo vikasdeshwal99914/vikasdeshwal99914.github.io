@@ -71,6 +71,7 @@ button:hover{background:#2e7d32}
 <p id="location">Location not fetched</p>
 
 <button onclick="saveData()">Save Details</button>
+<button onclick="downloadTXT()">Download TXT</button>
 
 <div class="saved">
 <h3>Saved Customers</h3>
@@ -81,7 +82,7 @@ button:hover{background:#2e7d32}
 <script>
 let latitude = "";
 let longitude = "";
-let customers = []; // 2D ARRAY
+let customers = [];
 
 function getLocation(){
   if(navigator.geolocation){
@@ -108,7 +109,6 @@ function saveData(){
     return;
   }
 
-  // STORE AS ARRAY
   let record = [
     name,
     mobile,
@@ -118,7 +118,6 @@ function saveData(){
   ];
 
   customers.push(record);
-
   alert("Customer saved successfully!");
 
   document.getElementById("name").value="";
@@ -135,8 +134,6 @@ function displayCustomers(){
   list.innerHTML="";
 
   customers.forEach(function(c){
-
-    // ⭐ EXACT REQUIRED FORMAT
     let formatted =
       '["' + c[0] + '","' +
       c[1] + '","' +
@@ -148,13 +145,33 @@ function displayCustomers(){
     p.textContent = formatted;
     list.appendChild(p);
   });
+}
 
-  console.log(customers);
+// ⭐ DOWNLOAD TXT FEATURE
+function downloadTXT(){
+  if(customers.length === 0){
+    alert("No customers to download");
+    return;
+  }
+
+  let textData = "";
+
+  customers.forEach(function(c){
+    textData +=
+      '["' + c[0] + '","' +
+      c[1] + '","' +
+      c[2] + '",' +
+      c[3] + ',' +
+      c[4] + '],\n';
+  });
+
+  let blob = new Blob([textData], { type: "text/plain" });
+  let link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "customers.txt";
+  link.click();
 }
 </script>
 
 </body>
 </html>
-
-
-
