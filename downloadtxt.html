@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customer Geolocation Form</title>
+
+<style>
+body{
+  font-family: Arial;
+  background: linear-gradient(120deg,#74ebd5,#9face6);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+  margin:0;
+}
+.container{
+  background:white;
+  padding:25px;
+  width:350px;
+  border-radius:15px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+h2{text-align:center;margin-bottom:15px}
+input, textarea{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+button{
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+  border:none;
+  border-radius:8px;
+  background:#4CAF50;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
+button:hover{background:#2e7d32}
+.saved{
+  margin-top:20px;
+  max-height:220px;
+  overflow:auto;
+  border-top:2px solid #eee;
+  padding-top:10px;
+}
+.saved p{
+  background:#f3f3f3;
+  padding:8px;
+  border-radius:6px;
+  font-size:13px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h2>Customer Details</h2>
+
+<input type="text" id="name" placeholder="Customer Name">
+<input type="tel" id="mobile" placeholder="Mobile Number">
+<textarea id="address" placeholder="Address"></textarea>
+
+<button onclick="getLocation()">Get My Location</button>
+<p id="location">Location not fetched</p>
+
+<button onclick="saveData()">Save Details</button>
+<button onclick="downloadTXT()">Download TXT</button>
+
+<div class="saved">
+<h3>Saved Customers</h3>
+<div id="list"></div>
+</div>
+</div>
+
+<script>
+let latitude = "";
+let longitude = "";
+let customers = [];
+
+function getLocation(){
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(function(pos){
+      latitude = pos.coords.latitude;
+      longitude = pos.coords.longitude;
+      document.getElementById("location").innerHTML =
+        "Latitude: "+latitude+" , Longitude: "+longitude;
+    }, function(){
+      alert("Location permission denied");
+    });
+  } else {
+    alert("Geolocation not supported");
+  }
+}
+
+function saveData(){
+  let name = document.getElementById("name").value;
+  let mobile = document.getElementById("mobile").value;
+  let address = document.getElementById("address").value;
+
+  if(name=="" || mobile=="" || address=="" || latitude==""){
+    alert("Please fill all fields and get location");
+    return;
+  }
+
+  let record = [
+    name,
+    mobile,
+    address,
+    parseFloat(latitude),
+    parseFloat(longitude)
+  ];
+
+  customers.push(record);
+  alert("Customer saved successfully!");
+
+  document.getElementById("name").value="";
+  document.getElementById("mobile").value="";
+  document.getElementById("address").value="";
+  document.getElementById("location").innerHTML="Location not fetched";
+  latitude=""; longitude="";
+
+  displayCustomers();
+}
+
+function displayCustomers(){
+  let list = document.getElementById("list");
+  list.innerHTML="";
+
+  customers.forEach(function(c){
+    let formatted =
+      '["' + c[0] + '","' +
+      c[1] + '","' +
+      c[2] + '",' +
+      c[3] + ',' +
+      c[4] + '],';
+
+    let p = document.createElement("p");
+    p.textContent = formatted;
+    list.appendChild(p);
+  });
+}
+
+// ⭐ DOWNLOAD TXT FEATURE
+function downloadTXT(){
+  if(customers.length === 0){
+    alert("No customers to download");
+    return;
+  }
+
+  let textData = "";
+
+  customers.forEach(function(c){
+    textData +=
+      '["' + c[0] + '","' +
+      c[1] + '","' +
+      c[2] + '",' +
+      c[3] + ',' +
+      c[4] + '],\n';
+  });
+
+  let blob = new Blob([textData], { type: "text/plain" });
+  let link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "customers.txt";
+  link.click();
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Links Page</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Segoe UI, Arial, sans-serif;
+}
+
+body{
+  height:100vh;
+  background:linear-gradient(135deg,#0072ff,#00e0ff);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.links-box{
+  background:white;
+  padding:40px 30px;
+  border-radius:20px;
+  width:90%;
+  max-width:420px;
+  box-shadow:0 15px 40px rgba(0,0,0,.25);
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  text-align:center;
+}
+
+h1{
+  margin-bottom:10px;
+  letter-spacing:3px;
+  color:#0072ff;
+}
+
+.link-btn{
+  text-decoration:none;
+  padding:16px;
+  border-radius:30px;
+  text-align:center;
+  font-size:18px;
+  font-weight:600;
+  color:white;
+  background:linear-gradient(45deg,#0072ff,#00c6ff);
+  transition:.35s;
+  box-shadow:0 6px 18px rgba(0,0,0,.25);
+}
+
+.link-btn:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 25px rgba(0,0,0,.35);
+}
+
+@media(max-width:500px){
+  .links-box{padding:30px 20px}
+  .link-btn{font-size:16px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="links-box">
+  <h1>Suresh Verma</h1>
+  <a href="mondaysureshverma.html" class="link-btn">Monday Beat</a>
+  <a href="#" class="link-btn">Tuesday Beat</a>
+  <a href="#" class="link-btn">Wednesday Beat</a>
+  <a href="#" class="link-btn">Thursday Beat</a>
+  <a href="#" class="link-btn">Friday Beat</a>
+    <a href="#" class="link-btn">Saturday Beat</a>
+</div>
+
+</body>
+</html>
