@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delivery Dashboard - Vikas Deshwal Trading Company</title>
+<style>
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f8; margin: 0; }
+
+  header {
+    background: #0078d7;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 30px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  }
+
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  input#search {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+
+  th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+
+  th {
+    background: #0078d7;
+    color: white;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 13px;
+  }
+
+  tr:hover { background-color: #f9f9f9; }
+
+  button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+  }
+
+  .map-btn {
+    background: #28a745;
+    color: white;
+  }
+
+  .map-btn:hover { background: #218838; }
+
+  .logout-btn {
+    background: #dc3545;
+    color: white;
+  }
+
+  .logout-btn:hover { background: #c82333; }
+
+  .badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    background: #e9ecef;
+    color: #495057;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <strong>Vikas Deshwal Trading Company</strong>
+    <span id="userBadge" class="badge" style="margin-left:10px; background: rgba(255,255,255,0.2); color: white;"></span>
+  </div>
+  <button class="logout-btn" onclick="logout()">Logout</button>
+</header>
+
+<div class="container">
+  <div class="controls">
+    <input id="search" type="text" placeholder="🔍 Search by client, city or area...">
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Client Name</th>
+        <th>City</th>
+        <th>Area</th>
+        <th id="contactHeader">Contact No.</th>
+        <th>Location</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody">
+      </tbody>
+  </table>
+</div>
+
+<script src="auth.js"></script>
+
+<script>
+  // 1. SECURITY CHECK: Redirect to login if no session exists
+  const role = sessionStorage.getItem("userRole");
+  const username = sessionStorage.getItem("username");
+
+  if (!role) {
+    window.location.href = "index.html";
+  }
+
+  // Display the logged-in username
+  document.getElementById("userBadge").innerText = `User: ${username}`;
+
+  // 2. DATA: Your delivery locations
+  const LOCATIONS = [
+    { name: "Neha Traders", city: "Delhi", area: "Connaught Place", contact: "9876543210", map: "https://goo.gl/maps/example1" },
+    { name: "Client B", city: "Mumbai", area: "Bandra", contact: "9876543211", map: "https://goo.gl/maps/example2" },
+    { name: "Global Exports", city: "Delhi", area: "Okhla", contact: "9999888877", map: "https://goo.gl/maps/example3" },
+    { name: "South Logistics", city: "Chennai", area: "Adyar", contact: "9123456789", map: "https://goo.gl/maps/example4" }
+  ];
+
+  // 3. UI LOGIC: Hide Contact column if the user is not an admin
+  const isAdmin = (role === "admin");
+  if (!isAdmin) {
+    document.getElementById("contactHeader").style.display = "none";
+  }
+
+  const tableBody = document.getElementById("tableBody");
+
+  // 4. RENDER FUNCTION
+  function render(data) {
+    tableBody.innerHTML = "";
+
+    data.forEach(item => {
+      const row = document.createElement("tr");
+
+      row.innerHTML = `
+        <td><strong>${item.name}</strong></td>
+        <td>${item.city}</td>
+        <td>${item.area}</td>
+        ${isAdmin ? `<td>${item.contact}</td>` : ""}
+        <td>
+          <button class="map-btn" onclick="window.open('${item.map}', '_blank')">
+            View Map
+          </button>
+        </td>
+      `;
+
+      tableBody.appendChild(row);
+    });
+  }
+
+  // Initial render
+  render(LOCATIONS);
+
+  // 5. SEARCH LOGIC
+  document.getElementById("search").addEventListener("input", e => {
+    const term = e.target.value.toLowerCase();
+    const filtered = LOCATIONS.filter(item =>
+      item.name.toLowerCase().includes(term) ||
+      item.city.toLowerCase().includes(term) ||
+      item.area.toLowerCase().includes(term)
+    );
+    render(filtered);
+  });
+</script>
+
+</body>
+</html>
