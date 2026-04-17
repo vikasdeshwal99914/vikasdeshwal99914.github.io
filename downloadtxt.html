@@ -72,6 +72,7 @@ button:hover{background:#2e7d32}
 
 <button onclick="saveData()">Save Details</button>
 <button onclick="downloadTXT()">Download TXT</button>
+<button onclick="copyAll()">Copy All Data</button>
 
 <div class="saved">
 <h3>Saved Customers</h3>
@@ -129,47 +130,41 @@ function saveData(){
   displayCustomers();
 }
 
+function getFormattedData(){
+  let textData = "";
+  customers.forEach(function(c){
+    textData += '["' + c[0] + '","' + c[1] + '","' + c[2] + '",' + c[3] + ',' + c[4] + '],\n';
+  });
+  return textData;
+}
+
 function displayCustomers(){
   let list = document.getElementById("list");
   list.innerHTML="";
-
-  customers.forEach(function(c){
-    let formatted =
-      '["' + c[0] + '","' +
-      c[1] + '","' +
-      c[2] + '",' +
-      c[3] + ',' +
-      c[4] + '],';
-
-    let p = document.createElement("p");
-    p.textContent = formatted;
-    list.appendChild(p);
-  });
+  list.innerText = getFormattedData();
 }
 
-// ⭐ DOWNLOAD TXT FEATURE
 function downloadTXT(){
   if(customers.length === 0){
     alert("No customers to download");
     return;
   }
 
-  let textData = "";
-
-  customers.forEach(function(c){
-    textData +=
-      '["' + c[0] + '","' +
-      c[1] + '","' +
-      c[2] + '",' +
-      c[3] + ',' +
-      c[4] + '],\n';
-  });
-
-  let blob = new Blob([textData], { type: "text/plain" });
+  let blob = new Blob([getFormattedData()], { type: "text/plain" });
   let link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
   link.download = "customers.txt";
   link.click();
+}
+
+function copyAll(){
+  if(customers.length === 0){
+    alert("No data to copy");
+    return;
+  }
+
+  navigator.clipboard.writeText(getFormattedData());
+  alert("All customer data copied!");
 }
 </script>
 
