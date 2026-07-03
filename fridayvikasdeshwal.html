@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Developer Customer Database</title>
+
+<style>
+
+
+body{
+  font-family: Arial;
+  background: linear-gradient(120deg,#a1c4fd,#c2e9fb);
+  margin:0;
+}
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:20px;
+}
+.card{
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+  margin-bottom:20px;
+}
+.customer{
+  background:#f3f6ff;
+  padding:15px;
+  border-radius:10px;
+  margin:10px 0;
+}
+button{
+  padding:8px 12px;
+  border:none;
+  border-radius:6px;
+  background:#0d47a1;
+  color:white;
+  cursor:pointer;
+  margin-top:5px;
+}
+button:hover{background:#002171}
+input{
+  width:100%;
+  padding:10px;
+  margin-bottom:10px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+pre{
+  background:black;
+  color:#00ff00;
+  padding:15px;
+  border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+
+
+<div class="container">
+
+<div class="card">
+<h2>Customer List (Developer Database)</h2>
+
+<input id="search" placeholder="🔍 Search by name, mobile or address..." onkeyup="searchCustomers()">
+
+<div id="list"></div>
+</div>
+
+
+</div>
+
+<script>
+
+// ⭐⭐⭐ DEVELOPER ADDS CUSTOMERS HERE ⭐⭐⭐
+// Format: [Name, Mobile, Address, Latitude, Longitude]
+let customersDB = [
+["1, Jai maa kuldevi ","9810978121","Aasram wali gali gali no 78",28.8333304,77.0758573],
+ ["2, Amit general Store ","9205265941","Gali no. 70 c , gonda road, savtantra nagar narela ",28.8389395,77.0766212],
+ ["3, kumar general Store ","9015475843","Gonda road savtantra nagar narela ",28.8417008,77.0770052],
+["4, Himanshi store ","9654521516","Gonda road, savtantra nagar narela ",28.842503,77.0769612],
+["5, shri Shyam kiryana store ","8750036000","Gonda road savtantra nagar narela ",28.8426643,77.0769858],
+["6,Vikram store ","8920636113","Gonda road savtantra nagar narela ",28.8484863,77.0775033],
+["7,Rajesh store ","8287470358","Gali no.25 b , savtantra nagar narela ",28.8430059,77.0774597],
+["8, parshu store ","9971784755","Gali no 25 b, savtantra nagar narela ",28.8429794,77.0780084],
+["9, anjali store near by Shiv Mandir","8178720189","Gali no 25 b, savtantra nagar narela ",28.8429658,77.0781739],
+["10, Sumit store ","7217750152","Near by MD public school, gali 30 b savtantra nagar narela ",28.841006,77.078137],
+["11, Rakesh store ","9811971640","Near by bharat mata mandir savtantra nagar narela ",28.8411257,77.0777764],
+["12, salman store ","9625831796","Janta hospital gali, near by bharat mata mandir ",28.8411416,77.0776022],
+["13,Ayan store ","9818324796","Near by bharat mata mandir gali no 30 b savtantra nagar narela ",28.8400995,77.0781277],
+["14, Aarti store ","7210166198","Near by bharat mata mandir, gali no 67 b, savtantra nagar narela ",28.8396158,77.0786506],
+["15, Shri shivay namastubhyam(Raj Kumar)store ","8745841121","Gali no 67 b, savtantra nagar narela ",28.8395862,77.0804575],
+["16, LN traders ","9811915470","Gali no 30 b savtantra nagar narela, near by bharat mata mandir ",28.8401139,77.0803721],
+["17, Shri nath store  ","9810938109","Gali no 30 b savtantra nagar narela ",28.8400727,77.0800272],
+["18, harshit store ","9871232390","Gali no 30 b savtantra nagar narela ",28.8401305,77.0798782],
+["19, gaurav goyal store ","9568051691","Gali no 30 b, savtantra nagar narela ",28.8400856,77.0797266],
+["20, KGN store ","9667609791","Gali no 30 b savtantra nagar narela ",28.8400841,77.0793905],
+["21, sehdev store ","84599001738","Near by bharat mata mandir gali no 30 b savtantra nagar narela ",28.8401029,77.0789494],
+["22, shri ram store ","8813894794","Gali no 30 b corner savtantra nagar narela ",28.8414894,77.079402],
+["23, Parveen store ","9718250851","Gali 30 b savtantra nagar narela ",28.8415377,77.0794047],
+["24, Subhash store ","7827837349","Gali no 30 b savtantra nagar narela ",28.841451,77.0814551],
+["25, pallavi store ","9718506480","Main savtantra nagar road narela ",28.8395193,77.0824465],
+["26, Hari general Store ","9560499995","Main savtantra nagar road narela ",28.8398259,77.0824221],
+["27, om general Store ","9717056871","Main savtantra nagar road narela ",28.8429051,77.0824834],
+["28, Bali store ","8527090170","Main savtantra nagar road narela ",28.8436144,77.0824269],
+["29, mukesh pansari ","9289240329","Main savtantra nagar road narela ",28.8452189,77.0825041],
+["30, shri shyam ( mannu goyal) store ","9899568984","Main savtantra nagar road narela ",28.845982,77.0825345],
+["31, singal store ","8448043190","Main savtantra nagar road narela ",28.8485315,77.0825527],
+["32, Shri shyam kapoor and sons store ","9968307075","Main savtantra nagar road narela ",28.8487483,77.0825568],
+["33, Vishnu store ","8851067486","Main savtantra nagar road narela ",28.8492504,77.0825912],
+["34, sagar store ","8810203731","Main savtantra nagar road narela ",28.8502309,77.0825814],
+["35, Kaniya store ","9718510200","Main savtantra nagar road narela ",28.8506311,77.0826001],
+["36, Rati Ram ","8700784763","Main savtantra nagar road narela ",28.8514539,77.0825524],
+["37, manoj store ","8750095493","Samsan ghat road kureni narela ",28.8413066,77.0906702],
+["38, sanjay sweets store ","9971828255","Kureni narela ",28.8409832,77.0928432],
+["39, govind store ","9899247262","Kesev bhawan, kureni narela ",28.8408987,77.0927749],
+["40, Dana Pani store ","9540917013","Kureni narela ",28.8407552,77.0915942],
+["41, Iqra store ","9818509232","Near by MCD school kureni narela ",28.8402366,77.0926502],
+["42, sahrukh khan store ","9818112653","Kureni ",28.8398314,77.093085],
+["43, aterna spices store ","9354858783","Kureni narela ",28.840761,77.0933401],
+["44,payal store ","9716840331","Near by hanuman daal Mill Kureni narela ",28.8414247,77.0953452],
+["45, chauhan general Store ","9541816903","Nearby hari daal Mill Kureni narela ",28.8424173,77.0946924],
+["46, har har mahadev store ","9818533352","Near by Hari daal Mill Kureni narela ",28.8424051,77.0947152],
+["47, Bala Ji store ","9990678864","Kureni narela ",28.8418383,77.0945354],
+["48, radhe Krishna store ","9354227406","Kureni narela ",28.8418163,77.0944626],
+["49, naveen general Store ","9718422025","Kureni narela ",28.8418579,77.0942417],
+["50, Sajid store ","9690594640","Kureni narela Balram store wali gali ",28.842083,77.0941472],
+["51, Balram store ","9582916616","Kureni narela ",28.8418672,77.094015],
+["52, devender store ","7250423544","Near by paani plant kureni narela ",28.8419225,77.0934255],
+["53, Paras store ","7503907433","Punjabi colony narela ",28.8449903,77.0901726],
+["54, Ram grocery store ","8287641210","Punjabi colony narela ",28.8458604,77.08966],
+["55, Vicky store ","9811238165","Purani anaj mandi narela ",28.8458992,77.0868098],
+["56, vishal store ","9213620026","Main narela bhorgarh road ",28.8448682,77.0891232],
+["57, deep masala and paneer bhandar ","7428839699","Main bhorgarh road ",28.8325336,77.0934661],
+["58, bhawani store ","9315115860","Main bhorgarh road ",28.8325196,77.0934781],
+["59, Shree shyam store ","9910982152","Main bhorgarh road ",28.8324957,77.0934542],
+["60, manish store ","9899252547","Paani plant shiv mandir wali gali bhorgarh ",28.8314489,77.0934334],
+["61, yadav store ","9968956359","Main bhorgarh road ",28.8278643,77.0951811],
+["62, Bajrang store ","7891784383","Fatak wali gali bhorgarh ",28.8282884,77.0943049],
+["63, rajkumar store ","9871872677","Fatak wali gali bhorgarh ",28.8284882,77.0933847],
+["64, anushka store ","9211216462","Tomar school wali gali bhorgarh ",28.8283024,77.0930854],
+["65,  manish (durga) wholesaler ","8368922587","Fatak wali gali bhorgarh ",28.8286468,77.0926367],
+["66, company store ","84007501","Last wali gali bhorgarh ",28.8312722,77.0919876],
+["67, aman store ","9911846381","Pardhan wali gali bhorgarh ",28.8295295,77.0923724],
+["68, satyam store ","7042608985","Nearby kubda doctor bhorgarh ",28.829737,77.0929025],
+["69, standard paneer bhandar ","8449004561","Bhorgarh chauhan wali chappal ",28.8293059,77.0935136],
+["70, Tannu store ","6205733838","Kumhar wali gali bhorgarh ",28.8297457,77.0939446],
+["71, JMD store ","9210590345","Msp mall bhorgarh industrial area ",28.8338629,77.0974139],
+["72, baba trading company store ","9136350172","Nearby vijay bank bhorgarh industrial area ",28.8286996,77.1016245],
+["73, Daya Shankar store ","8800941165","Vardhman select mall bhorgarh industrial area ",28.825094,77.1039846],
+["74, ajay store ","9560017345","Vardhman select mall bhorgarh industrial area ",28.8251945,77.1039227],
+["75, gori shankar store ","8810686075","Vardhman select mall bhorgarh industrial area ",28.8252235,77.1039104],
+["76, Gupta general Store ","9971574780","Vardhman select mall bhorgarh industrial area ",28.825582,77.1039728],
+["77, Sahu general Store ","8882547512","Vardhaman select mall bhorgarh industrial area ",28.8258051,77.1048095],
+["78, yadav store ","8873383216","Nearby by Mohan dhaba bhorgarh industrial area ",28.8232116,77.1068179],
+["79, Deepak store ","9599668070","CISF family complex sahpur gadi ",28.8235893,77.112297],
+["80, yadav store ","7827645197","CISF family complex sahpur gadi ",28.8232445,77.1126356],
+["81,Pandit ji store ","9821262751","Sahpur gadi ",28.8203566,77.1079474],
+["82, pandit ji brother store same store ","7042371257","Sahpur gadi ",28.8202829,77.1074795],
+["83, sonu store ","9643581742","Sahpur gadi ",28.8177305,77.1058949],
+["84, Ram store ","9971222500","Sahpur gadi ",28.8202709,77.1054759],
+["85, Varsha store ","8076731097","Sahpur gadi ",28.8203311,77.1057863],
+["86, Naresh store ","9868598981","Sahpur gadi ",28.82034,77.1060426],
+["87, baba vednath store ","9599406626","Sahpur gadi ",28.8203219,77.1065347],
+["88, Gautam store ","9971457893","Sahpur gadi ",28.8202871,77.1072423],
+
+
+];
+
+function displayCustomers(arr){
+  let list=document.getElementById("list");
+  list.innerHTML="";
+
+  arr.forEach((c)=>{
+    list.innerHTML+=`
+    <div class="customer">
+      <b>${c[0]}</b><br>
+      📞 ${c[1]}<br>
+      📍 ${c[2]}<br>
+      Lat: ${c[3]} | Long: ${c[4]}<br>
+      <button onclick="track(${c[3]},${c[4]})">Track Location</button>
+    </div>`;
+  });
+
+  document.getElementById("database").textContent =
+      JSON.stringify(customersDB, null, 2);
+}
+
+function searchCustomers(){
+  let text=document.getElementById("search").value.toLowerCase();
+
+  let filtered = customersDB.filter(c =>
+      c[0].toLowerCase().includes(text) ||
+      c[1].includes(text) ||
+      c[2].toLowerCase().includes(text)
+  );
+
+  displayCustomers(filtered);
+}
+
+function track(lat,long){
+  window.open(`https://www.google.com/maps?q=${lat},${long}`);
+}
+
+// load all initially
+displayCustomers(customersDB);
+
+</script>
+</body>
+</html>
