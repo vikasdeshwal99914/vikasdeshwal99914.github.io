@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Developer Customer Database</title>
+
+<style>
+
+
+body{
+  font-family: Arial;
+  background: linear-gradient(120deg,#a1c4fd,#c2e9fb);
+  margin:0;
+}
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:20px;
+}
+.card{
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+  margin-bottom:20px;
+}
+.customer{
+  background:#f3f6ff;
+  padding:15px;
+  border-radius:10px;
+  margin:10px 0;
+}
+button{
+  padding:8px 12px;
+  border:none;
+  border-radius:6px;
+  background:#0d47a1;
+  color:white;
+  cursor:pointer;
+  margin-top:5px;
+}
+button:hover{background:#002171}
+input{
+  width:100%;
+  padding:10px;
+  margin-bottom:10px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+pre{
+  background:black;
+  color:#00ff00;
+  padding:15px;
+  border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+
+
+<div class="container">
+
+<div class="card">
+<h2>Customer List Saturday beat(vikas Deshwal)</h2>
+
+<input id="search" placeholder="🔍 Search by name, mobile or address..." onkeyup="searchCustomers()">
+
+<div id="list"></div>
+</div>
+
+
+</div>
+
+<script>
+
+// ⭐⭐⭐ DEVELOPER ADDS CUSTOMERS HERE ⭐⭐⭐
+// Format: [Name, Mobile, Address, Latitude, Longitude]
+let customersDB = [
+["1 , Bajrang store ","9911903765","Nearby sabji Mandi narela ",28.8554746,77.0898362],
+["2, Rachna store ","9312875795","Saboli road narela ",28.8574808,77.0910321],
+["3, Singal tent house ","9953914446","Saboli road narela ",28.8583245,77.0910236],
+["4, Sudhir store ","9650693670","Saboli road narela ",28.8599402,77.0910944],
+["5, santosh store ","7838839213","Gali no 7, rajeev colony, saboli road narela ",28.8606158,77.0921126],
+["6, Dakash store ","8810439206","Gali no 5, sanjay colony, narela ",28.8622315,77.0897977],
+["7, mayank store ","9911340399","Gali no 15, sanjay colony narela ",28.8620928,77.0879401],
+["8, madhav confectionery ","9650756039","Safiyabad road narela ",28.8640731,77.0849477],
+["9, Prince store ","7838545349","Opposite by aradhya ",28.86369,77.0851864],
+["10, Ram Ram store ","9568312977","Safiyabad road narela ",28.8629903,77.085576],
+["11, suraj store ","8750424029","Safiyabad road near by kalka store ",28.8620624,77.0860949],
+["12, Kalka ji store ","9136395561","Safiyabad road narela ",28.861968,77.0860455],
+["13, subham Goyal (mandal) store ","8607543731","Safiyabad road narela ",28.861037,77.0864132],
+["14, Gupta general Store ","9210731358","Safiyabad road narela ",28.8610653,77.0865669],
+["15, Shri vishram store ","9560846013","Safiyabad road narela ",28.8609796,77.086716],
+["16, maa mohini store ","8368011650","Safiyabad road narela ",28.8602307,77.0870532],
+["17, mohan general Store ","9110074959","Nearby sushila nursing Home , Gali no 9, safiyabad road ",28.8595815,77.0865502],
+["18, suresh general Store ","9697478160","Gali no 4 safiyabad road narela ",28.8571068,77.0875509],
+["19, Sai store gali no 4, ","9582607622","Safiyabad road narela ",28.8571136,77.0872181],
+["20, vipin store ","9473762636","Gali no 4, safiyabad road narela ",28.8570968,77.0870789],
+["21, shukla store ","9354085094","Gali no 4, safiyabad road narela ",28.8572966,77.0857312],
+["22, Lucky store ","9990428714","Gali no 4, safiyabad road narela ",28.857107,77.0826642],
+["23, ranjan store ","9899399663","Near by DAV public school, gautam colony narela ",28.8561916,77.0849561],
+["24, mishra store ","9811104360","Near by DAV public school gautam colony narela ",28.8562196,77.0844534],
+["25, Aman store ","7827322056","Jk farm wali gali, gautam colony narela ",28.8560753,77.0853698],
+["26, kapil Dev store ","9310576265","Jk farm wali gali gautam colony narela ",28.8559882,77.0853271],
+["27, mohit store ","9971733561","Gautam colony narela ",28.8541891,77.0852537],
+["28, radhika store  ramnarayan ","9540578774","Gali no 3 gautam colony narela ",28.855477,77.087633],
+["29, saparsh kaushik Shiv pansari ","8826824736","Patwar ghar narela,toda mal dharamsala ",28.8546575,77.0897337],
+["30, roshan lal pandit ji store ","8650381999","Mamarpur road narela ",28.8551193,77.0912921],
+["31, gautam store","7428642972","Mamarpur road narela ",28.8554206,77.0925052],
+["32, Janta store ","7835883565","Mamarpur road narela ",28.8553681,77.0928312],
+["33, New pardeep ","8920100912","Mamarpur road narela ",28.8575391,77.0932861],
+["34, sawariya store ","9310597305","Pocket 2, Budh bazar narela ",28.8546459,77.0972769],
+["35, sachin Rishi pal store ","9773693253","Pocket 3, Budh Nagar narela ",28.8541515,77.0969229],
+["36, Sahil store,","9213991489","Pocket 7, Budh bazar narela ",28.8535108,77.0986661],
+["37, bedi store ","8700737844","Pocket pocket 7, Budh bazar narela ",28.8541824,77.0992814],
+["38, nitin sharma store ","9210313120","Budh bazar narela ",28.8536879,77.100154],
+["39,Bimlesh store ","9990205106","Budh bazar narela ,flat no 100 ",28.8526927,77.1006125],
+["40, Om dairy store ","7503179963","Pocket 4, Budh bazar narela ",28.8564946,77.1018377],
+["41, jeevan general Store ","7503399789","Pocket 4, Budh bazar narela ",28.855524,77.1028682],
+["42, kumar store ","9871726906","Budh bazar road narela ",28.8547621,77.1023514],
+["43, Govind store ","9873490724","Budh bazar narela ",28.8552544,77.0993678],
+["44, Bansal store ","9899920613","Budh bazar narela ",28.8547982,77.0990475],
+["44, manju store ","9716073675","Budh bazar road narela ",28.8544423,77.0989092],
+["45, kanha dairy ","9811200731","Budh bazar road narela ",28.8547364,77.0983792],
+["46, Aanandi store ","9717663653","Gandhi ashram road narela ",28.8508809,77.0939392],
+["47, pandit Badri Prasad store ","9717620880","Vijay chowk ",28.8513883,77.092617],
+["48, Vk( vicky) paneer bhandar store ","7827281657","Vijay chowk narela ",28.8518339,77.0923435],
+["49, Anuj store ","7011867987","Shivaji nagar Church road narela ",28.8493492,77.088857],
+["50, Ruby store  ","9210106425","church road narela",28.848908,77.090981],
+["51, jai Mata paneer bhandar (shri dev) store ","7734081543","Bala Ji apartment narela ",28.843802,77.0976297],
+["52, shree shyam (sanjeev) store ","8750722481","Sec 10 narela ",28.840745,77.1007758],
+["53, yadav store ","9670127078","Sec 10 narela ",28.8405534,77.1012389],
+["54, vinod gupta ","9117551629","Sec 10 narela ",28.8402615,77.1014006],
+["55, Shiv store ","8882219317","Sec 10 narela ",28.8394265,77.1017608],
+["56, Alisha store ","9015274191","Sec 10 narela ",28.8392926,77.1014521],
+["57, Mayank store ","9210611833","Nearby mishra welding Sec 10 narela ",28.8390706,77.1008121],
+["58, shree shyam store ","9958234948","Sec 10 narela ",28.8394048,77.1001653],
+["59, sanjay store ","8882147149","Sec 10 narela ",28.8400426,77.099868],
+["60, Janta store ","9650198381","Near by MCD rehman , pocket 11 ",28.8494267,77.1050515],
+["61, MD rehman store ","9211494904","Pocket 11, narela ",28.8500375,77.1048863],
+["63, Kiran store ","8448346006","Pocket 11 narela ",28.8509399,77.1034582],
+["64, vivek store ","8448261170","Pocket 11 narela ",28.8512755,77.1026583],
+["62, Rajesh store ","9871192873","Pocket 11 narela ",28.8510571,77.1040228],
+["65, Abdul Hamid store ","9811505110","Pocket 5, narela ",28.8528069,77.1041197],
+["66, Ik Kaur store ","9311581417","Golden apartment narela ",28.8520811,77.1075829],
+["67, krishu store ","9971607741","Hind appartment narela ",28.8500766,77.1099524],
+["68, Ayush store ","9560994787","Hind appartment narela ",28.848688,77.1100125],
+["69, kunal store ","9717516580","Hind appartment narela ",28.8488974,77.1103355],
+["70, yadav store ","8603793498","Hind appartment narela ",28.8488611,77.1103181],
+["71, Kanchan store ","9911327888","Hind appartment narela ",28.8488635,77.1094231],
+["72, Avinash Mishra store ","9540704520","Hind appartment narela ",28.8493232,77.1096162],
+["73, Gupta general Store ","9265587697","Hind appartment narela ",28.8493415,77.1093997],
+["74, Nayra dairy distributor ","8826855751","Hind appartment narela ",28.8493791,77.1090629],
+["75, singroha store ","9911401004","Mansa apartment narela ",28.8492464,77.1119597],
+
+];
+
+function displayCustomers(arr){
+  let list=document.getElementById("list");
+  list.innerHTML="";
+
+  arr.forEach((c)=>{
+    list.innerHTML+=`
+    <div class="customer">
+      <b>${c[0]}</b><br>
+      📞 ${c[1]}<br>
+      📍 ${c[2]}<br>
+      Lat: ${c[3]} | Long: ${c[4]}<br>
+      <button onclick="track(${c[3]},${c[4]})">Track Location</button>
+    </div>`;
+  });
+
+  document.getElementById("database").textContent =
+      JSON.stringify(customersDB, null, 2);
+}
+
+function searchCustomers(){
+  let text=document.getElementById("search").value.toLowerCase();
+
+  let filtered = customersDB.filter(c =>
+      c[0].toLowerCase().includes(text) ||
+      c[1].includes(text) ||
+      c[2].toLowerCase().includes(text)
+  );
+
+  displayCustomers(filtered);
+}
+
+function track(lat,long){
+  window.open(`https://www.google.com/maps?q=${lat},${long}`);
+}
+
+// load all initially
+displayCustomers(customersDB);
+
+</script>
+</body>
+</html>
