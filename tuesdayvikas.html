@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Developer Customer Database</title>
+
+<style>
+
+
+body{
+  font-family: Arial;
+  background: linear-gradient(120deg,#a1c4fd,#c2e9fb);
+  margin:0;
+}
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:20px;
+}
+.card{
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+  margin-bottom:20px;
+}
+.customer{
+  background:#f3f6ff;
+  padding:15px;
+  border-radius:10px;
+  margin:10px 0;
+}
+button{
+  padding:8px 12px;
+  border:none;
+  border-radius:6px;
+  background:#0d47a1;
+  color:white;
+  cursor:pointer;
+  margin-top:5px;
+}
+button:hover{background:#002171}
+input{
+  width:100%;
+  padding:10px;
+  margin-bottom:10px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+pre{
+  background:black;
+  color:#00ff00;
+  padding:15px;
+  border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+
+
+<div class="container">
+
+<div class="card">
+<h2>Customer List Saturday beat(vikas Deshwal)</h2>
+
+<input id="search" placeholder="🔍 Search by name, mobile or address..." onkeyup="searchCustomers()">
+
+<div id="list"></div>
+</div>
+
+
+</div>
+
+<script>
+
+// ⭐⭐⭐ DEVELOPER ADDS CUSTOMERS HERE ⭐⭐⭐
+// Format: [Name, Mobile, Address, Latitude, Longitude]
+let customersDB = [
+["1, Vikram store ","9212914286","Tigipur moad, bakhtiyarpur ",28.8254451,77.1763021],
+["2, Vansh rana store ","8076314800","Tigipur moad, bakhtiyarpur ",28.825216,77.1762569],
+["3, Lakshmi store ","9213188433","Tigipur road, bakhtiyarpur ",28.8246157,77.1761911],
+["4, Radha dairy ","8851216812","Tigipur moad bakhtiyarpur ",28.8222741,77.1763126],
+["5, Darashan lal store ","9871828184","Jindpur road ",28.7924135,77.1591926],
+["6, Sanjay store ","7678116600","Jindpur road ",28.7924103,77.1591702],
+["7, Rahul store ","8447555098","Jindpur road ",28.7926141,77.1593504],
+["8, kirtika sakshi paneer bhandar ","9582195700","Jindpur road ",28.7926109,77.1588189],
+["9, Today bazar store ","9811431291","Jindpur road ",28.7926566,77.1583859],
+["10, Om  store ","9212615042","Jindpur road ",28.793057,77.1529239],
+["11, SGM store ","7701854929","Jindpur road ",28.7929533,77.1504704],
+["12, Saini store ","9870572349","Jindpur road ",28.7928093,77.1471158],
+["13, shri bhumiya store ","6376117685","Jindpur road ",28.7932307,77.146965],
+["14, Tun Tun store ","8750677056","Jindpur road ",28.793342,77.1461426],
+["15, Rajasthani store ","8529643895","Near by balmiki mandir alipur ",28.7989802,77.1348686],
+["16, Jagdish store ( jai sagar)","9910567396","Holi chowk Alipur ",28.798971,77.133902],
+["17, Saini store ","9136719810","Near by bada Shiv mandir alipur ",28.8003322,77.134741],
+["18, Rana dairy ","8081362858","Nearby bada Shiv mandir alipur ",28.8003841,77.1347529],
+["19, Hirender store ","7210314515","Near by bada Shiv mandir alipur ",28.8004126,77.1347476],
+["20, sapna gupta store ","7678281618","Nearby chhota Shiv mandir alipur ",28.8001803,77.1331016],
+["21, Pooja (mintu) store ","9540566924","Alipur ",28.8004206,77.1325648],
+["22, bhumi telecom and general Store ","9899885277","Alipur ",28.8012373,77.1325002],
+["23, maa Durga chirag store ","9311796043","Alipur ",28.8012844,77.1324914],
+["24, Shivani dairy store ","8586864316","Near by gitanjali school alipur ",28.8014252,77.1310055],
+["25, Rakesh store (old)","9910275390","Cake factory wali gali alipur ",28.802051,77.1309348],
+["26,Dev narayan store ","880074315","Cake factory wali gali alipur ",28.8019921,77.1303282],
+["27, Shine store ","9266683209","Near by cake factory wali ",28.8020713,77.1323382],
+["28, Jitender store ","9717616169","Cake factory wali gali alipur ",28.8033524,77.1325758],
+["29, Parwati store ","8750942276","Cake factory wali gali alipur ",28.8033301,77.1326349],
+["30, Hari krishna store ","9354696612","Cake factory wali gali alipur ",28.801952,77.1348128],
+["31, Bhardwaj dairy Tanu store ","7210153537","Alipur guliya colony alipur ",28.7998907,77.1314932],
+["32, shree ji store","9870443159","Guliya colony alipur ",28.799582,77.1301935],
+["33, Sonam store ","7503180136","Himmat chowk Alipur ",28.7992793,77.1292504],
+["34, maha laxmi (Ramu) store ","8285185315","Tikona Park alipur ",28.7984746,77.1286747],
+["35, Bala Ji store ","9313178306","Nearby by ICICI ATM alipur ",28.7972116,77.1350039],
+["36, Siya Ram store ","7859024593","Bank wali gali alipur ",28.7967583,77.1352952],
+["37, Jaipal store ","9315997077","Bank wali gali alipur ",28.7947631,77.1353189],
+["38, Sanjay store ","7011303560","Bank wali gali alipur ",28.7936256,77.1352889],
+["39, Gupta general Store ","7289925079","Near by Bhardwaj property alipur ",28.7936186,77.1365244],
+["40, Maa gayatri store ","7701839840","Nearby bhardwaj property alipur ",28.7935152,77.1364179],
+["41, Chanchal store ","9654338651","Seed farm wali gali alipur ",28.7926458,77.1383884],
+["42, Sonu store ","9312605808","BDO office wali gali alipur ",28.7935553,77.138732],
+["43, Vikas dairy store ","9210512697","BDO office wali gali alipur ",28.7936606,77.1383323],
+["44, Vinit store ","8810629908","Mini stadium road alipur ",28.7940979,77.1378937],
+["45, Amir Chand store ","9868746237","Nearby nisha Maan ki kothi alipur ",28.7945599,77.1365661],
+["46, shankar store ","8285279405","Near by naval garden alipur ",28.7950429,77.1364913],
+
+];
+
+function displayCustomers(arr){
+  let list=document.getElementById("list");
+  list.innerHTML="";
+
+  arr.forEach((c)=>{
+    list.innerHTML+=`
+    <div class="customer">
+      <b>${c[0]}</b><br>
+      📞 ${c[1]}<br>
+      📍 ${c[2]}<br>
+      Lat: ${c[3]} | Long: ${c[4]}<br>
+      <button onclick="track(${c[3]},${c[4]})">Track Location</button>
+    </div>`;
+  });
+
+  document.getElementById("database").textContent =
+      JSON.stringify(customersDB, null, 2);
+}
+
+function searchCustomers(){
+  let text=document.getElementById("search").value.toLowerCase();
+
+  let filtered = customersDB.filter(c =>
+      c[0].toLowerCase().includes(text) ||
+      c[1].includes(text) ||
+      c[2].toLowerCase().includes(text)
+  );
+
+  displayCustomers(filtered);
+}
+
+function track(lat,long){
+  window.open(`https://www.google.com/maps?q=${lat},${long}`);
+}
+
+// load all initially
+displayCustomers(customersDB);
+
+</script>
+</body>
+</html>
