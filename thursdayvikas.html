@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Developer Customer Database</title>
+
+<style>
+
+
+body{
+  font-family: Arial;
+  background: linear-gradient(120deg,#a1c4fd,#c2e9fb);
+  margin:0;
+}
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:20px;
+}
+.card{
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+  margin-bottom:20px;
+}
+.customer{
+  background:#f3f6ff;
+  padding:15px;
+  border-radius:10px;
+  margin:10px 0;
+}
+button{
+  padding:8px 12px;
+  border:none;
+  border-radius:6px;
+  background:#0d47a1;
+  color:white;
+  cursor:pointer;
+  margin-top:5px;
+}
+button:hover{background:#002171}
+input{
+  width:100%;
+  padding:10px;
+  margin-bottom:10px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+pre{
+  background:black;
+  color:#00ff00;
+  padding:15px;
+  border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+
+
+<div class="container">
+
+<div class="card">
+<h2>Customer List Saturday beat(vikas Deshwal)</h2>
+
+<input id="search" placeholder="🔍 Search by name, mobile or address..." onkeyup="searchCustomers()">
+
+<div id="list"></div>
+</div>
+
+
+</div>
+
+<script>
+
+// ⭐⭐⭐ DEVELOPER ADDS CUSTOMERS HERE ⭐⭐⭐
+// Format: [Name, Mobile, Address, Latitude, Longitude]
+let customersDB = [
+["1, Gaur Mart store ","9811575041","singola village (Sushil)",28.8443504,77.1242792],
+["2, Giri Ji store ","9773583402","Singola village ",28.8446142,77.1231146],
+["3, Neeraj store ","7428711249","Singola village ",28.8445414,77.1229413],
+["4, Sunil store ","9873464364","Singola village ",28.8445292,77.1225578],
+["Jeet store ","8595100366","Godown side singhu border ",28.8606893,77.1259457],
+["Omkar (omparkash store)","8059252306","Godown side singhu border ",28.8606936,77.1262408],
+["5, Rajeev store ","7503240585","Singhu village ",28.853362,77.1283416],
+["6, Raja store ","9953889770","Singhu village purana mandir wali gali ",28.8512869,77.129388],
+["7, Rajender store ","7503340914","Singhu village ",28.8504472,77.1306921],
+["8, Rambir store ","8512030584","Singhu village ",28.8501923,77.1309506],
+["9, Sehdev store ","9990808275","Singhu village firni par",28.8506467,77.1313559],
+["10, kuku store ","8285127101","Singhu village ",28.8516169,77.1310788],
+["11, Savitri store ","7836998620","Singhu village ",28.8537916,77.1307936],
+["12, Sudhir store ","9311890357","Singhu village ",28.8543947,77.1310329],
+["13, Arvind store ","9205364811","Singhu village ",28.854449,77.1307308],
+["14, Uday store ","9891685977","Near by brainbox coaching centre singhu",28.8554329,77.1305463],
+["15, sonu store ","7988992462","Som bazar singhu village ",28.854371,77.1291785],
+["16, Santosh riya Store ","9882849898","Singhu village ",28.8544703,77.1294264],
+["17, Abhishek store ","9971067965","Singhu village ",28.8545445,77.1294025],
+["18, Joginder store ","9716590025","Singhu village ",28.8546462,77.1294045],
+["19, Papu store ","9873836098","Singhu village ",28.8546989,77.1294022],
+["20, Khatu Shyam store ","9026377326","Singhu village ",28.8552757,77.1294489],
+["21, Maa baleswari store ","8375086497","Singhu road ",28.8573045,77.1294902],
+["22, Amit store ","8930926686","Singhu road singhu ",28.8586106,77.1296548],
+["25 Abhishek store new HR ","9991207235","Singhu road singhu village ",28.8609802,77.129577],
+["23, Sagar store ","9050017716","Sagar store singhu road Lakhmi piou ",28.8631887,77.1267635],
+["26, sachin garg(sonu) store ","8053272109","Durga colony kundli ",28.8734433,77.1248733],
+["27, Pankaj store ","9729456879","Durga colony kundli ",28.873386,77.1247026],
+["28, prashant dairy ","9812496387","Durga colony kundli ",28.873432,77.1239616],
+["29, vishal store (chhedi)","8295224941","Durga colony kundli ",28.8734342,77.1239597],
+["30, Shiv Gujarati store ","7404407463","Durga colony kundli ",28.8733788,77.123777],
+["31, Kaniya store ","9896812604","Durga colony kundli ",28.8733612,77.123543],
+["32, Anil 2 store ","9729254560","niftem road landa colony kundli ",28.8762186,77.1245206],
+["33, lal jawahar (Ishu) store ","9817382506","Niftem road landa colony kundli ",28.8761225,77.1236293],
+["35, satpal store ","9992558030","Gadi kundli ",28.8832699,77.1337866],
+["36, Chhabinath(Aryan) store ","8053519924","Gaidor colony kundli ",28.8716813,77.1342374],
+["37, Sunil store ","9050459648","Gaidor colony kundli ",28.8717028,77.1338688],
+["38, Umesh store ","9416538244","Gaidor colony kundli ",28.8716585,77.1339118],
+["39, Sachin store ","9671232247","Khatkad village ",28.8776251,77.1651867],
+["40, Parveen ( yadram) store ","9871330812","Khatkad village ",28.8773229,77.1650706],
+["41, Paplu store ","9310057199","Khatkad village ",28.8768823,77.1667883],
+["42, Sarita store ","7027297647","Khatkad village ",28.8754913,77.1663678],
+["43, Rahul store ","7289990942","Khatkad village ",28.8755573,77.1674375],
+["44, Adesh store ","7082088441","Jaati village ",28.863829,77.1653445],
+["45, Ramniwas  store (shree shyam)","7206770287","Jaati village ",28.8620641,77.1612358],
+["46, vinod pandit ji store ","5555555","Jaati village ",28.8601722,77.161914],
+["48, Kala store ","333333333","Jaati village ",28.8593539,77.1628074],
+["49, Chirag store ","8930661915","Jaati village ",28.8597457,77.1642142],
+
+];
+
+function displayCustomers(arr){
+  let list=document.getElementById("list");
+  list.innerHTML="";
+
+  arr.forEach((c)=>{
+    list.innerHTML+=`
+    <div class="customer">
+      <b>${c[0]}</b><br>
+      📞 ${c[1]}<br>
+      📍 ${c[2]}<br>
+      Lat: ${c[3]} | Long: ${c[4]}<br>
+      <button onclick="track(${c[3]},${c[4]})">Track Location</button>
+    </div>`;
+  });
+
+  document.getElementById("database").textContent =
+      JSON.stringify(customersDB, null, 2);
+}
+
+function searchCustomers(){
+  let text=document.getElementById("search").value.toLowerCase();
+
+  let filtered = customersDB.filter(c =>
+      c[0].toLowerCase().includes(text) ||
+      c[1].includes(text) ||
+      c[2].toLowerCase().includes(text)
+  );
+
+  displayCustomers(filtered);
+}
+
+function track(lat,long){
+  window.open(`https://www.google.com/maps?q=${lat},${long}`);
+}
+
+// load all initially
+displayCustomers(customersDB);
+
+</script>
+</body>
+</html>
