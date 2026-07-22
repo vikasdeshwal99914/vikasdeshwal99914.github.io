@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Developer Customer Database</title>
+
+<style>
+
+
+body{
+  font-family: Arial;
+  background: linear-gradient(120deg,#a1c4fd,#c2e9fb);
+  margin:0;
+}
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:20px;
+}
+.card{
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+  margin-bottom:20px;
+}
+.customer{
+  background:#f3f6ff;
+  padding:15px;
+  border-radius:10px;
+  margin:10px 0;
+}
+button{
+  padding:8px 12px;
+  border:none;
+  border-radius:6px;
+  background:#0d47a1;
+  color:white;
+  cursor:pointer;
+  margin-top:5px;
+}
+button:hover{background:#002171}
+input{
+  width:100%;
+  padding:10px;
+  margin-bottom:10px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+pre{
+  background:black;
+  color:#00ff00;
+  padding:15px;
+  border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+
+
+<div class="container">
+
+<div class="card">
+<h2>Customer List Saturday beat(vikas Deshwal)</h2>
+
+<input id="search" placeholder="🔍 Search by name, mobile or address..." onkeyup="searchCustomers()">
+
+<div id="list"></div>
+</div>
+
+
+</div>
+
+<script>
+
+// ⭐⭐⭐ DEVELOPER ADDS CUSTOMERS HERE ⭐⭐⭐
+// Format: [Name, Mobile, Address, Latitude, Longitude]
+let customersDB = [
+["1, Manoj store ","7082868102","Prem colony kundli ",28.8759707,77.1201529],
+["2, Khushi store ","7206164054","Prem colony kundli ",28.8759676,77.1197392],
+["3, Kalka ji store ","9053477371","Prem colony kundli ",28.8759983,77.1190847],
+["4, Shivam store ","8950465643","Prem colony kundli ",28.8759934,77.1181152],
+["5, Mohit store ","9311629817","Prem colony kundli ",28.876037,77.1162033],
+["6, Sonu store ","9350154590","Near by dada bhiya mandir kundli ",28.8707792,77.1207613],
+["7, Omparkash store ","11111111111","Kundli village ",28.8701051,77.1208999],
+["8, Anuj store ","7056014520","Kundli village ",28.8705558,77.1203708],
+["9, Jagmohan store ","9518470282","Near by jaato wali chopal kundli ",28.8706708,77.1199328],
+["10, sanjeev (Rathod) store ","7357422688","Kundli village ",28.8713826,77.1195017],
+["11, Amarjeet store ","9896561317","Kundli village ",28.869526,77.1180657],
+["12, manoj (pandit ji)store ","9991128295","Kundli village ",28.869528,77.1181401],
+["13, Ramesh master store ","8222900693","Near by Shiva model school kundli ",28.8686428,77.1174872],
+["14, mohit store ","8930161712","Near by Shiva model school kundli ",28.8683953,77.1172711],
+["15, Vineet store ","8053132033","Tikaram colony kundli ",28.8669125,77.11714],
+["16, kala dairy store ","1111111111","Tikaram colony kundli ",28.8664275,77.116539],
+["17, Amit store ","9671932580","Tikaram colony kundli ",28.8657053,77.1197096],
+["18, Sharma store ","9315614342","LG godown kundli ",28.8665029,77.1212334],
+["19,sahjal store ","11111111","Lag godown kundli ",28.8659634,77.1211263],
+["20, Bablu store ","9050404279","Near by LG godown ",28.8659468,77.1208946],
+["21, Surjit store ","9053339090","LG godown side kundli ",28.8645667,77.1207845],
+["22, Rinku punjabi ","8816812112","White House wali gali kundli ",28.8671588,77.120881],
+["23, Amit store ","8950016248","Dada bhaiya colony kundli ",28.8719813,77.1168068],
+["24, Ranjay store ","9991621115","Dada bhaiya colony kundli ",28.8718983,77.1164947],
+["25, Uttam store ","7056339853","Ghee mill kundli ",28.8748756,77.1117442],
+["26, Monu ( bala ji) store ","9911083860","Ghee mill kundli ",28.8746428,77.1113495],
+["27, Satdev store ","7056974813","Ghee mill kundli ",28.8741183,77.1124439],
+["28, Monu store ","9306905647","Ratan colony kundli ",28.8762409,77.1147716],
+["29, Raj maurya store ","7419232492","Piou to narela road ",28.8758299,77.111748],
+["30, laxmi store ","7290000973","Piou to narela road ",28.8757505,77.1115479],
+["31,Ashok store ","9813635270","Piou to narela road ",28.8755771,77.1114044],
+["32, Vedprakash store ","7982058291","Piou to narela road ",28.8756086,77.1112469],
+["33, Shivam store ","9991210232","Along with drain kundli ",28.8726438,77.1119716],
+["34, Dushyant store ","9896473269","Along with drain kundli ",28.8726182,77.1122557],
+["35, khatri stationary and general Store ","9728017404","Shivpuri colony piou ",28.871996,77.1055388],
+["36, Manish (Om shiv Amul )","8860106310","Shivpuri colony ",28.8720071,77.1054068],
+["37, Rahul masala store ","9729856509","Shivpuri colony piou ",28.871982,77.1054242],
+["38, Sanjeev store ","8930248330","Shivpuri colony piou ",28.8719879,77.10541],
+["39, Mahadev enterprises ","8930117878","Shivpuri colony piou ",28.8714433,77.1059723],
+["40, Shri Bala ji store ","9667340287","Near aman dharam kata piou to narela road ",28.8727651,77.1072536],
+["41, Dharam Das store ","9050776874","Near by arihant company piou to narela road ",28.8747093,77.1104907],
+["42,Sachin kiryana store","7042622919","Paper mill piou ",28.8785044,77.1119156],
+["43, Manish store ","8569907306","Paper mill piou ",28.8806183,77.1092478],
+["44, Ramesh store ","8814030921","Paper mill piou ",28.8800105,77.1096706],
+["45, shri radhe namkeen bhandar ","8383980342","Piou to narela road ",28.8784054,77.1144315],
+["46,Raju store ","8930914799","Piou to narela road ",28.8784777,77.1144468],
+["47, Sanjay store ","9813492328","Near by sabji Mandi piou to narela road ",28.8795923,77.1151062],
+["48, Devika store ","9034603058","Piou to narela road ",28.8797233,77.1151677],
+["49, Mintu store ","9817801476","Piou to narela road ",28.8798664,77.1152935],
+["50, Love kiryana store ","9728903124","Piou to narela road ",28.8802565,77.1158971],
+["51, priyanshu (pritum) store ","7404807489","Near by niketan house ",28.8804128,77.1179721],
+["52, Umakant maurya store ","9053946035","Astral pipe ke samne piou",28.8810574,77.1164916],
+["53, Pucho jha store ","7206256242","Gali no 1/2, piou ",28.8801318,77.1149325],
+["54, Saini namkeen store ","7357111122","Gali no 3 piou ",28.8809918,77.1158182],
+["55, Ramnaresh store ","8168006851","Gali no 4 piou ",28.881175,77.1156747],
+["56, JMD store ","8818054370","Gali no 3 piou",28.8811004,77.11403],
+["57, Nanak store ","7703994542","Gali no 4 piou ",28.8816718,77.112091],
+["58, Dikshit store ","9050601046","Gali no 6 piou ",28.8819745,77.1127846],
+["59, Rahul store ","8053452398","Gali no 6 piou ",28.8819754,77.112788],
+["60, Yaspal master ji store ","9813278981","Near by sabji Mandi piou ",28.8835173,77.1171237],
+["61, Abhay store ","7027535181","Near by sabji Mandi piou ",28.8834893,77.1171852],
+
+];
+
+function displayCustomers(arr){
+  let list=document.getElementById("list");
+  list.innerHTML="";
+
+  arr.forEach((c)=>{
+    list.innerHTML+=`
+    <div class="customer">
+      <b>${c[0]}</b><br>
+      📞 ${c[1]}<br>
+      📍 ${c[2]}<br>
+      Lat: ${c[3]} | Long: ${c[4]}<br>
+      <button onclick="track(${c[3]},${c[4]})">Track Location</button>
+    </div>`;
+  });
+
+  document.getElementById("database").textContent =
+      JSON.stringify(customersDB, null, 2);
+}
+
+function searchCustomers(){
+  let text=document.getElementById("search").value.toLowerCase();
+
+  let filtered = customersDB.filter(c =>
+      c[0].toLowerCase().includes(text) ||
+      c[1].includes(text) ||
+      c[2].toLowerCase().includes(text)
+  );
+
+  displayCustomers(filtered);
+}
+
+function track(lat,long){
+  window.open(`https://www.google.com/maps?q=${lat},${long}`);
+}
+
+// load all initially
+displayCustomers(customersDB);
+
+</script>
+</body>
+</html>
